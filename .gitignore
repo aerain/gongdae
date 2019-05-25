@@ -33,15 +33,15 @@ HELP.md
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-cra-react/node_modules
-cra-react/.pnp
+/node_modules
+/.pnp
 .pnp.js
 
 # testing
-cra-react/coverage
+/coverage
 
 # production
-cra-react/build
+/build
 
 # misc
 .DS_Store
@@ -54,3 +54,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+#Custom
+bin
+src/main/resources/static/precache-*
+src/main/resources/static/static
