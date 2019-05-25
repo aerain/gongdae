@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
+import '../../css/Header.css'
+import { setMetaTheme } from '../../service';
 
 export default class Header extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
-            <div>Hello, World!</div>
+            <header className="header">
+                <button className="material-icons menu">menu</button>
+            </header>
         )
     }
 }

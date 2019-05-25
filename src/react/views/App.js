@@ -1,13 +1,16 @@
 import React from 'react';
-import logo from '../icon/logo.svg';
 import '../css/App.css';
+import Home from './home/Home';
+import { BrowserRouter} from 'react-router-dom'
 import Header from './components/Header'
-
 function App() {
   return (
-    <div className="App">
-      <Header />
-    </div>
+    <BrowserRouter>
+      <div className="content" style={{height: window.innerHeight}}>
+        <Header />
+        <Home />
+      </div>
+    </BrowserRouter>
   );
 }
 

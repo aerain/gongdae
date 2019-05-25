@@ -1,0 +1,19 @@
+.home-list {
+    display: flex;
+    flex:1;
+    position: relative;
+}
+
+.add-float {
+    position: absolute;
+    right: 16px;
+    bottom: 16px;
+    padding: 12px;
+    border-radius: 50%;
+    outline: 0;
+    border: 0;
+    background-color: #ff000055;
+    color: #ffffff;
+    font-weight: bold;
+    box-shadow: 0 4px 4px #c7c7c7;
+}

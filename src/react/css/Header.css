@@ -1,0 +1,14 @@
+.header {
+    background-color: #1e207c;
+    box-shadow: 0 2px 2px 0 #e7e7e7;
+    padding: 8px 16px;
+}
+.header > .menu {
+    font-size: 2rem;
+    color: #f7f7f7;
+    font-weight: bold;
+    background-color: transparent;
+    outline: 0;
+    border: 0;
+    padding: 0;
+}
