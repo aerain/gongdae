@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import '../../css/Header.css'
-import { setMetaTheme } from '../../service';
 
 export default class Header extends Component {
     render() {

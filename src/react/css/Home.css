@@ -1,19 +1,68 @@
 .home-list {
     display: flex;
+    flex-direction: column;
     flex:1;
-    position: relative;
+    padding: 16px;
 }
 
+a {text-decoration: none; color: #000000;}
+
 .add-float {
-    position: absolute;
-    right: 16px;
-    bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 12px;
-    border-radius: 50%;
-    outline: 0;
-    border: 0;
-    background-color: #ff000055;
-    color: #ffffff;
+    border-radius: 12px;
+    border: 0.5px #d7d7d7 solid;
+    background-color: #ffffff;
+    color: #aaaaaa;
+    margin: 16px 0px;
+}
+
+.add-float > .add-icon {
+    display: flex;
+    background-color: #d7d7d7;
+    padding: 15px 20px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    color: #777777;
+    margin-bottom: 4px;
+    font-size:2rem;
     font-weight: bold;
-    box-shadow: 0 4px 4px #c7c7c7;
+}
+
+.add-float > p {
+    padding:0;
+    margin:0;
+    font-size: 0.8rem;
+    color: #000000;
+}
+
+.list-item {
+    background-color: #ffffff;
+    box-shadow: 0 2px 8px #e7e7e7;
+    margin: 8px 0;
+    border: 0.5px solid #e7e7e7;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.item-content { 
+    padding: 0px 12px;
+}
+
+.list-item > .item-img {
+    max-height: 120px;
+    width: 100%;
+}
+
+.item-content > .item-title {
+    font-size: 1.2rem;
+    margin:4px 0;
+    font-weight: bold;
+}
+.item-content > .item-company-size {
+    float: right;
+    font-size: 0.85rem;
 }
