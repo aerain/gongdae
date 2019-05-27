@@ -67,7 +67,7 @@ export default class Home extends Component {
     }
 
     _renderBlock = item => (
-        <Link to={`/submit/${item.id}`} className="list-item">
+        <Link to={`/request/${item.id}`} className="list-item">
             <img className="item-img" src={item.imgUrl} alt="견적 이미지"/>
             <div className="item-content">
                 <p className="item-title">{item.title}</p>
