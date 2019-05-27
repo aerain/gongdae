@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import '../../css/Home.css'
+import Header from '../components/Header';
 export default class Home extends Component {
     constructor(props) {
         super(props);
@@ -53,6 +54,10 @@ export default class Home extends Component {
     render() {
         return (
             <div className="home-list">
+                <Header 
+                    icon="menu"
+                    onClick={() => alert("hi")}
+                />
                 {
                     this.state.list.map(this._renderBlock)
                 }

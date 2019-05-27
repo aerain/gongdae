@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     flex:1;
-    padding: 16px;
+    margin-top: calc(2rem + 16px);
 }
 
 a {text-decoration: none; color: #000000;}
@@ -16,7 +16,7 @@ a {text-decoration: none; color: #000000;}
     border: 0.5px #d7d7d7 solid;
     background-color: #ffffff;
     color: #aaaaaa;
-    margin: 16px 0px;
+    margin: 16px;
 }
 
 .add-float > .add-icon {
@@ -42,7 +42,7 @@ a {text-decoration: none; color: #000000;}
 .list-item {
     background-color: #ffffff;
     box-shadow: 0 2px 8px #e7e7e7;
-    margin: 8px 0;
+    margin: 8px 16px;
     border: 0.5px solid #e7e7e7;
     border-radius: 12px;
     overflow: hidden;

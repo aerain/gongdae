@@ -8,7 +8,6 @@ function App() {
   return (
     <BrowserRouter>
       <div className="content">
-        <Header />
         <Route path="/" exact component={Home} />
         <Route path="/submit/:id" component={Submit} />
       </div>

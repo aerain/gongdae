@@ -5,7 +5,13 @@ export default class Header extends Component {
     render() {
         return (
             <header className="header">
-                <button className="material-icons menu">menu</button>
+                <button 
+                    className="material-icons menu"
+                    onClick={this.props.onClick}
+                >
+                    {this.props.icon}
+                </button>
+                {this.props.rightElement}
             </header>
         )
     }
