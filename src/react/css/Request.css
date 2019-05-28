@@ -13,13 +13,25 @@ input { border: 0; border-bottom: 0.5px solid #000000}
 .description-content > .title {
     border: 0;
     font-size: 1.5rem;
-    padding: 8px 0;
+    margin: 16px 0;
     border-bottom: 0.5px solid #000000;
+}
+
+.description-content > .place-content {
+    margin: 12px 0 32px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.place-content > .place {
+    flex: 1;
+    margin-left: 16px;
 }
 
 .description-content > .vr-image {
     background-color: #d7d7d7;
     height: 120px;
+    margin: 12px 0;
 }
 
 .request-list-header {
@@ -33,4 +45,28 @@ input { border: 0; border-bottom: 0.5px solid #000000}
     background-color: #d7d7d7;
     border: 0;
     color: #777777;
+    padding: 8px;
+    font-weight: bold;
+}
+
+.request-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    box-shadow: 0 2px 8px #b7b7b7;
+    padding: 16px 12px;
+    margin: 16px 0;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.assist-img {
+    width: 50px;
+    height: 50px;
+    background-color: #d7d7d7;
+    color: #777777;
+    outline: 0;
+    border: 0;
 }
