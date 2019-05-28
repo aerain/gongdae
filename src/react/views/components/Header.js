@@ -11,7 +11,7 @@ export default class Header extends Component {
                 >
                     {this.props.icon}
                 </button>
-                {(typeof this.props.rightElement !== 'function') ? this.props.rightElement() : null}
+                {(typeof this.props.rightElement === 'function') ? this.props.rightElement() : null}
             </header>
         )
     }
