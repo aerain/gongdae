@@ -8,7 +8,7 @@ function App() {
     <BrowserRouter>
       <div className="content">
         <Route path="/" exact component={Home} />
-        <Route path="/request/:id" component={Request} />
+        <Route path="/request" component={Request} />
       </div>
     </BrowserRouter>
   );

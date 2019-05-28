@@ -43,7 +43,7 @@ export default class Home extends Component {
     }
 
     _renderFloatButton = () => (
-        <Link to="/add-request" className="add-float">
+        <Link to="/request" className="add-float">
             <div className="material-icons add-icon">
                 add
             </div>
@@ -67,7 +67,7 @@ export default class Home extends Component {
     }
 
     _renderBlock = item => (
-        <Link key={item.id} to={`/request/${item.id}`} className="list-item">
+        <Link key={item.id} to={`/request-list/${item.id}`} className="list-item">
             <img className="item-img" src={item.imgUrl} alt="견적 이미지"/>
             <div className="item-content">
                 <p className="item-title">{item.title}</p>
