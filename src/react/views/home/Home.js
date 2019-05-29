@@ -68,11 +68,13 @@ export default class Home extends Component {
 
     _renderBlock = item => (
         <Link key={item.id} to={`/request-list/${item.id}`} className="list-item">
-            <img className="item-img" src={item.imgUrl} alt="견적 이미지"/>
+            <div className="item-bg" style={{backgroundImage: `url(${item.imgUrl})`}}></div>
+            <div style={{flex: 1}} />
             <div className="item-content">
                 <p className="item-title">{item.title}</p>
-                <p className="item-company-size">{item.companySize} 건의 참여</p>    
+                <p className="item-company-size">{item.companySize} 건의 참여</p> 
             </div>
+            
         </Link>
     )
 }
