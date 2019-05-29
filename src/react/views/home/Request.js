@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import Header from '../components/Header';
 import '../../css/Request.css'
+import VRImage from '../components/VRimage';
+
 export default class Request extends Component {
     constructor(props) {
         super(props);
@@ -82,13 +84,11 @@ export default class Request extends Component {
             return prevState;
         });
     }
-    _renderVRImg = () => {
-        return (<img className="vr-image" alt="360 이미지"/>)
-    }
+
     _renderSaveButton = () => (
         <div className="request-header-right-element">
-            <button>임시 저장</button>
-            <button>저장</button>
+            <button onClick={this.saveTempRequestToDatabase}>임시 저장</button>
+            <button onClick={this.saveRequestToDatabase}>저장</button>
         </div>
     )
     render() {
@@ -106,7 +106,7 @@ export default class Request extends Component {
                         <input type="text" className="place" onChange={e => this.changeText(e, "place")}></input>
                     </div>
                     <span>360 VR 사진을 필수로 올려주세요.</span>
-                    {this._renderVRImg()}
+                    <VRImage className="vr-image" />
                     <div className="request-list-header">
                         <span>요구사항</span>
                         <button 
