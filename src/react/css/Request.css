@@ -32,6 +32,9 @@ input { border: 0; border-bottom: 0.5px solid #000000}
     background-color: #d7d7d7;
     height: 120px;
     margin: 12px 0;
+    display:flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .request-list-header {
@@ -93,11 +96,13 @@ input { border: 0; border-bottom: 0.5px solid #000000}
 }
 
 .assist-img-input {
-    position: absolute;
+    /* position: absolute;
     width: 1px;
     height: 1px;
     padding: 0;
     margin: -1px;
     overflow: hidden;
     border: 0;
+} */
+    display: none;
 }

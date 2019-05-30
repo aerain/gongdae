@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Header from '../components/Header';
 import '../../css/Request.css'
-import VRImage from '../components/VRimage';
+import VRImage from '../components/VRImage';
 
 export default class Request extends Component {
     constructor(props) {
@@ -37,7 +37,6 @@ export default class Request extends Component {
 
     renderPreviewImage = (index, event) => {
         let img = event.target.files[0];
-        console.log('파일은', img)
         this.setState(prevState => {
             prevState.requestList[index].imgUrl = img;
             return prevState;
@@ -68,21 +67,55 @@ export default class Request extends Component {
         </div>
     )
 
-    addRequestList = () => {
-        this.setState(prevState => {
-            prevState.requestList.push({
-                description: '',
-                imgUrl: null,
-            });
-            return prevState;
+    addRequestList = () => this.setState(prevState => {
+        prevState.requestList.push({
+            description: '',
+            imgUrl: null,
         });
-    }
+        return prevState;
+    });
     changeText = (event, key) => {
         const value = event.currentTarget.value;
         this.setState(prevState => {
             prevState[key] = value;
             return prevState;
         });
+    }
+
+    changeVRImage = e => {
+        let value = e.target.files[0];
+        this.setState(state => {
+            state.vrImgUrl = value;
+            console.log(state);
+            return state;
+        });
+    }
+
+    saveRequestToDatabase = async () => {
+        const { title, place, vrImgUrl, requestList } = this.state;
+        const sendData = new FormData();
+        sendData.append('title', title);
+        sendData.append('place', place);
+        sendData.append('vrImgUrl', vrImgUrl);
+        // sendData.append('requestList', requestList);
+
+        const options = {
+            method: 'POST',
+            headers: {
+                // 'Content-Type': 'multipart/form-data',
+                'Charset': 'UTF-8'
+            },
+            body: sendData
+        }
+
+        delete options.headers['Content-Type'];
+        try {
+            let response = await fetch('/api/request-auction', options); 
+            console.log(await response.json());    
+        } catch(err) {
+            console.error(err);
+        }
+        
     }
 
     _renderSaveButton = () => (
@@ -106,7 +139,7 @@ export default class Request extends Component {
                         <input type="text" className="place" onChange={e => this.changeText(e, "place")}></input>
                     </div>
                     <span>360 VR 사진을 필수로 올려주세요.</span>
-                    <VRImage className="vr-image" />
+                    <VRImage className="vr-image" src={this.state.vrImgUrl} onChange={this.changeVRImage}/>
                     <div className="request-list-header">
                         <span>요구사항</span>
                         <button 
