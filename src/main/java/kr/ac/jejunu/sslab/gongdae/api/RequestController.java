@@ -19,7 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/request-action")
 public class RequestController {
 
     private final FileUploadService fileUploadService;
@@ -31,16 +31,13 @@ public class RequestController {
         this.requestDao = requestDao;
     }
 
-    @GetMapping("/request-auction")
+    @GetMapping
     public Map<String, Object> test() {
         Map<String, Object> result = new HashMap<>();
         result.put("test", "get");
         return result;
     }
-    @PostMapping(
-        path="/request-auction",
-        consumes= {MediaType.MULTIPART_FORM_DATA_VALUE}
-    )
+    @PostMapping(consumes= {MediaType.MULTIPART_FORM_DATA_VALUE})
     public void requestAction(
         @RequestParam String title,
         @RequestParam String place,
@@ -49,7 +46,7 @@ public class RequestController {
         ) throws IOException {
 
         String imagePath = fileUploadService.uploadFile(vrImgUrl);
-        Request req = Request.builder().title(title).place(place).vrImgPath(imagePath).build();
-        requestDao.add();
+        Request req = Request.builder().title(title).place(place).vrImgPath(imagePath).clientId(1L).build();
+        requestDao.add(req);
     }
 }

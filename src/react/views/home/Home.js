@@ -16,7 +16,6 @@ export default class Home extends Component {
     }
 
     getList = () => {
-
         // TODO fetch list
         this.setState({
             list: [
@@ -68,7 +67,7 @@ export default class Home extends Component {
 
     _renderBlock = item => (
         <Link key={item.id} to={`/request-list/${item.id}`} className="list-item">
-            <div className="item-bg" style={{backgroundImage: `url(${item.imgUrl})`}}></div>
+            <div className="item-bg" style={{backgroundImage: `url(${item.imgUrl})`}} />
             <div style={{flex: 1}} />
             <div className="item-content">
                 <p className="item-title">{item.title}</p>

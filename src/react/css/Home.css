@@ -61,12 +61,12 @@ a {text-decoration: none; color: #000000;}
     bottom: 0;
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: 50% 50%;
-    filter: blur(4px)
+    background-position: 50% 50%
 }
 .item-content { 
-    padding: 0px 12px;
-    color: #ffffff;
+    padding: 8px 12px;
+    background-color: #e7e7e7cc;
+    color: #000;
     z-index: 2;
 }
 

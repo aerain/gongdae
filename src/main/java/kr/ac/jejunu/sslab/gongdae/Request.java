@@ -7,6 +7,7 @@ import lombok.Data;
 @Builder
 public class Request {
     private Long id;
+    private Long clientId;
     private String title;
     private String place;
     private String vrImgPath;

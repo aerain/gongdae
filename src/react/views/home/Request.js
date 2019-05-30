@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Header from '../components/Header';
 import '../../css/Request.css'
 import VRImage from '../components/VRImage';
+import { Redirect } from 'react-router-dom';
 
 export default class Request extends Component {
     constructor(props) {
@@ -12,15 +13,12 @@ export default class Request extends Component {
             place: "",
             vrImgUrl: null,
             requestList: [
-            ]    
+            ],
+            isSaved: false
         };
     }
 
-    componentDidMount = () => {
-        
-    }
-
-     goBack = () => this.props.history.goBack();
+    goBack = () => this.props.history.goBack();
 
     _requestList = () => (
         <div className="request-list">
@@ -111,7 +109,8 @@ export default class Request extends Component {
         delete options.headers['Content-Type'];
         try {
             let response = await fetch('/api/request-auction', options); 
-            console.log(await response.json());    
+            console.log(response);
+            this.setState({isSaved: true})
         } catch(err) {
             console.error(err);
         }
@@ -125,7 +124,7 @@ export default class Request extends Component {
         </div>
     )
     render() {
-        return (
+        return (this.state.isSaved) ? <Redirect to="/" /> : (
             <div className="request-content">
                 <Header 
                 icon="arrow_back_ios"
