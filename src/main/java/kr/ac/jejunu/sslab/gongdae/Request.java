@@ -10,5 +10,6 @@ public class Request {
     private Long clientId;
     private String title;
     private String place;
-    private String vrImgPath;
+    private String imgUrl;
+    private Long companySize;
 }

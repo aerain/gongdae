@@ -24,9 +24,9 @@ public class RequestListController {
 
     @GetMapping
     public Map<String, Object> getRequestList() {
-        Collection<Request> requests = (Collection<Request>) requestDao.getAll();
+        Collection<Request> requests = requestDao.getAll();
         return new HashMap<>() {{
-            put("data", "hi");
+            put("data", requests);
         }};
     }
 }

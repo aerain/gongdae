@@ -19,7 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
-@RequestMapping("/api/request-action")
+@RequestMapping("/api/request-auction")
 public class RequestController {
 
     private final FileUploadService fileUploadService;
@@ -46,7 +46,7 @@ public class RequestController {
         ) throws IOException {
 
         String imagePath = fileUploadService.uploadFile(vrImgUrl);
-        Request req = Request.builder().title(title).place(place).vrImgPath(imagePath).clientId(1L).build();
+        Request req = Request.builder().title(title).place(place).imgUrl(imagePath).clientId(1L).build();
         requestDao.add(req);
     }
 }
