@@ -58,3 +58,4 @@ yarn-error.log*
 bin
 src/main/resources/static/precache-*
 src/main/resources/static/static
+images/**

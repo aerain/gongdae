@@ -1,4 +1,5 @@
 import Home from './Home';
 import Request from './Request'
+import RequestList from './RequestList'
 
-export { Home, Request }
+export { Home, Request, RequestList }

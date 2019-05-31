@@ -28,7 +28,16 @@ public class RequestDao implements Dao<Request> {
 
     @Override
     public Request get(Long id) {
-        return null;
+        String sql = "SELECT * from request where id = ?";
+        Object[] params = new Object[]{ id };
+        return jdbcTemplate.queryForObject(sql, params, (rs, rowNum) -> Request.builder()
+                .id(rs.getLong("id"))
+                .clientId(rs.getLong("client_id"))
+                .title(rs.getString("title"))
+                .place(rs.getString("place"))
+                .imgUrl(rs.getString("vr_image_url"))
+                .companySize(rs.getLong("company_size"))
+        .build());
     }
 
     @Override
