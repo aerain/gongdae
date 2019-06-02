@@ -36,7 +36,7 @@ export default class Request extends Component {
     renderPreviewImage = (index, event) => {
         let img = event.target.files[0];
         this.setState(prevState => {
-            prevState.requestList[index].imgUrl = img;
+            prevState.requestList[index].assistimgUrl = img;
             return prevState;
         })
     }
@@ -49,29 +49,29 @@ export default class Request extends Component {
             value={item.description} 
             onChange={e => this.changeRequestValue(index, e)}    
             />
-            {
-                (item.imgUrl || "") ? (
-                    <img src={URL.createObjectURL(item.imgUrl)} className="assist-img" alt="추가 이미지"/>
-                ) : (
-                    [
-                        <label key="button" htmlFor="assist-file" className="material-icons assist-img">add</label>,
-                        <input key="hidden-file" type="file" className="assist-img-input" ref="assist-file" id="assist-file" 
-                        onChange={e => this.renderPreviewImage(index, e)}
-                        />
-                    ]
-                    
-                )
-            }
+            {/*{*/}
+            {/*    (item.assistimgUrl || "") ? (*/}
+            {/*        <img src={URL.createObjectURL(item.assistimgUrl)} className="assist-img" alt="추가 이미지"/>*/}
+            {/*    ) : (*/}
+            {/*        [*/}
+            {/*            <label key="button" htmlFor="assist-file" className="material-icons assist-img">add</label>,*/}
+            {/*            <input key="hidden-file" type="file" className="assist-img-input" ref="assist-file" id="assist-file" */}
+            {/*            onChange={e => this.renderPreviewImage(index, e)}*/}
+            {/*            />*/}
+            {/*        ]*/}
+            {/*        */}
+            {/*    )*/}
+            {/*}*/}
         </div>
     )
 
     addRequestList = () => this.setState(prevState => {
         prevState.requestList.push({
             description: '',
-            imgUrl: null,
+            // assistimgUrl: null,
         });
         return prevState;
-    });
+    })
     changeText = (event, key) => {
         const value = event.currentTarget.value;
         this.setState(prevState => {
@@ -89,18 +89,18 @@ export default class Request extends Component {
         });
     }
 
-    saveRequestToDatabase = async () => {
+    saveRequestToServer = async () => {
         const { title, place, vrImgUrl, requestList } = this.state;
         const sendData = new FormData();
         sendData.append('title', title);
         sendData.append('place', place);
         sendData.append('vrImgUrl', vrImgUrl);
-        // sendData.append('requestList', requestList);
+        sendData.append('requestList', JSON.stringify(requestList));
 
         const options = {
             method: 'POST',
             headers: {
-                // 'Content-Type': 'multipart/form-data',
+                // 'Content-Type': 'application/json',
                 'Charset': 'UTF-8'
             },
             body: sendData
@@ -119,8 +119,8 @@ export default class Request extends Component {
 
     _renderSaveButton = () => (
         <div className="request-header-right-element">
-            <button onClick={this.saveTempRequestToDatabase}>임시 저장</button>
-            <button onClick={this.saveRequestToDatabase}>저장</button>
+            <button onClick={this.saveTempRequestToServer}>임시 저장</button>
+            <button onClick={this.saveRequestToServer}>저장</button>
         </div>
     )
     render() {

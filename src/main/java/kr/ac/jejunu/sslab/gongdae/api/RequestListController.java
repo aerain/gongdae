@@ -1,32 +1,35 @@
 package kr.ac.jejunu.sslab.gongdae.api;
 
-import kr.ac.jejunu.sslab.gongdae.Request;
-import kr.ac.jejunu.sslab.gongdae.dao.RequestDao;
-import org.springframework.beans.factory.annotation.Autowired;
+import kr.ac.jejunu.sslab.gongdae.dao.RequestDetailRepository;
+import kr.ac.jejunu.sslab.gongdae.dao.RequestRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/api/request-list")
+@RequiredArgsConstructor
 public class RequestListController {
 
-    private final RequestDao requestDao;
-
-    @Autowired
-    public RequestListController(RequestDao requestDao) {
-        this.requestDao = requestDao;
-    }
-
+    private final RequestRepository requestRepository;
+    private final RequestDetailRepository requestDetailRepository;
     @GetMapping
     public Map<String, Object> getRequestList() {
-        Collection<Request> requests = requestDao.getAll();
+        Long clientId = 1L;
         return new HashMap<>() {{
-            put("data", requests);
+            put("data", requestRepository.findAll());
+        }};
+    }
+
+    @GetMapping("/{id}")
+    public Map<String, Object> getRequestById(@PathVariable Long id) {
+        return new HashMap<>() {{
+            put("data", requestDetailRepository.findById(id));
         }};
     }
 }
