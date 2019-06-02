@@ -23,10 +23,15 @@ public class Request {
     private String place;
     @Column(name = "vr_image_url")
     private String imgUrl;
+    @Transient
     private Long companySize;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "request_id")
     @JsonIgnore
 //    @JsonIgnoreProperties(value={"request"})
     private List<RequestDetail> requestDetailList;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "request_id")
+    @JsonIgnore
+    private List<ReverseAuction> reverseAuctionList;
 }

@@ -12,7 +12,5 @@ import java.util.List;
 
 @Repository
 public interface RequestDetailRepository extends JpaRepository<RequestDetail, Long> {
-    @Query(value = "SELECT * FROM request_sub where request_id = :id", nativeQuery = true)
-//    @Query("SELECT rd FROM RequestDetail rd where rd.request.id = :id")
-    List<RequestDetail> findAllByRequestId(@Param("id") Long id);
+    List<RequestDetail> findAllByRequestId(@Param("request_id") Long requestId);
 }
