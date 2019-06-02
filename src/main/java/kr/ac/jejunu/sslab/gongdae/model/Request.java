@@ -26,7 +26,7 @@ public class Request {
     private Long companySize;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "request_id")
-//    @JsonIgnore
-    @JsonIgnoreProperties(value={"request"})
+    @JsonIgnore
+//    @JsonIgnoreProperties(value={"request"})
     private List<RequestDetail> requestDetailList;
 }

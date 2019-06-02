@@ -5,50 +5,79 @@ export default class RequestList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            dataSource: {},
-            companyList: []
+            item: {},
+            requestList: [],
+            companyList: [],
+            toggleSubList: false,
         }
     }
 
     componentDidMount = async () => {
         this.getDataSource();
+        this.getRequestList();
         this.getCompanyList();
     }
     getCompanyList = async () => {
         // Todo Fetch
-        this.setState({companyList: [{
-            id: 1,
-            companyName: '제대루',
-            
-        }]})
+        this.setState({
+            companyList: [{
+                id: 1,
+                companyName: '제대루',
+
+            }]
+        })
     }
 
+    getDataSource = async () => {
+        const {id} = this.props.match.params;
+        const uri = `/api/request-list/${id}`;
+        try {
+            const {data} = await (await fetch(uri)).json();
+            this.setState({item: data});
+        } catch (err) {
+            console.error(err);
+        }
+    }
+    getRequestList = async () => {
+        const {id} = this.props.match.params;
+        const uri = `/api/request-detail/${id}`;
+        try {
+            const {data} = await (await fetch(uri)).json();
+            this.setState({requestList: data})
+        } catch (err) {
+            console.error(err);
+        }
+    }
     goBack = () => this.props.history.goBack();
+
     render() {
-        let { id, clientId, title, place, imgUrl, companySize } = this.state.dataSource;
+        let { item } = this.state;
         return (
             <div className="request-list-content">
                 <Header
                     icon="arrow_back_ios"
                     onClick={this.goBack}
                 />
-                <p className="title">{title}</p>
-                <div style={{backgroundImage: `url(${imgUrl})`}} alt="테스트" className="vr-img"/>
-                <div className="sub-list">
+                <p className="title">{item.title}</p>
+                <div style={{backgroundImage: `url(${item.imgUrl})`}} alt="테스트" className="vr-img"/>
+                <button className="sub-list" onClick={this.toggleSubList}>
                     <span>내 요청리스트</span>
-                    <button className="material-icons">arrow_drop_down</button>
-                </div>
+                    <div className="material-icons" >
+                        {this.state.toggleSubList ? "arrow_drop_up" : "arrow_drop_down"}
+                    </div>
+                </button>
+                {this.state.toggleSubList && this._renderSubList()}
                 <div className="join-company">
                     <div className="company-header">
                         <p>해당 의뢰에</p>
-                        <p>{companySize} 개의 회사가 참여해요!</p>
+                        <p>{item.companySize} 개의 회사가 참여해요!</p>
                     </div>
                     {
                         this.state.companyList.map(this._renderCompanyItem)
                     }
                     {this._renderCompanyItem()}
                 </div>
-                
+
             </div>
         );
     }
@@ -61,15 +90,17 @@ export default class RequestList extends Component {
         </div>
     )
 
-    getDataSource = () =>{
-        // Todo fetch
-        this.setState({dataSource: {
-            id: 1,
-            clientId: 1,
-            title: '내 집 리모델링',
-            place: '내 집',
-            imgUrl: 'https://freshome.com/wp-content/uploads/2017/07/contrast-living-room-1.jpg',
-            companySize: 1
-        }});
-    }
+    _renderSubList = () => (this.state.requestList.length === 0) ?
+        (
+            <div className="sub-list-content">없어요</div>
+        ) : (
+            <div className="sub-list-content">
+                {
+                    this.state.requestList.map(item => (
+                        <div className="sub-list-item">{item.description}</div>
+                    ))
+                }
+            </div>
+        )
+    toggleSubList = event => this.setState(state => ({toggleSubList: !state.toggleSubList}))
 }

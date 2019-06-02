@@ -19,17 +19,11 @@ import java.util.Collection;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class RequestService {
-    private FileUploadService fileUploadService;
-    private RequestRepository requestRepository;
-    private RequestDetailRepository requestDetailRepository;
+    private final FileUploadService fileUploadService;
+    private final RequestRepository requestRepository;
 
-    @Autowired
-    public RequestService(RequestRepository requestRepository, FileUploadService fileUploadService, RequestDetailRepository requestDetailRepository) {
-        this.requestRepository = requestRepository;
-        this.fileUploadService = fileUploadService;
-        this.requestDetailRepository = requestDetailRepository;
-    }
     public void saveRequest(String title, String place, MultipartFile vrImgUrl, String requestList) throws IOException {
         List<RequestDetail> requestDetailList = new Gson().fromJson(requestList, new TypeToken<List<RequestDetail>>(){}.getType());
         String imagePath = fileUploadService.uploadFile(vrImgUrl);
@@ -40,6 +34,5 @@ public class RequestService {
         });
         req.setRequestDetailList(requestDetailList);
         requestRepository.save(req);
-
     }
 }

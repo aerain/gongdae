@@ -13,7 +13,7 @@ import java.io.IOException;
 @Service
 public class FileUploadService {
     public String uploadFile(@RequestParam MultipartFile vrImgUrl) throws IOException {
-        String filePath = "images/" + vrImgUrl.getOriginalFilename();
+        String filePath = "/images/" + vrImgUrl.getOriginalFilename();
         File path =
                 new File("images/" + vrImgUrl.getOriginalFilename());
         FileOutputStream fileOutputStream = new FileOutputStream(path);

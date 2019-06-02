@@ -49,19 +49,6 @@ export default class Request extends Component {
             value={item.description} 
             onChange={e => this.changeRequestValue(index, e)}    
             />
-            {/*{*/}
-            {/*    (item.assistimgUrl || "") ? (*/}
-            {/*        <img src={URL.createObjectURL(item.assistimgUrl)} className="assist-img" alt="추가 이미지"/>*/}
-            {/*    ) : (*/}
-            {/*        [*/}
-            {/*            <label key="button" htmlFor="assist-file" className="material-icons assist-img">add</label>,*/}
-            {/*            <input key="hidden-file" type="file" className="assist-img-input" ref="assist-file" id="assist-file" */}
-            {/*            onChange={e => this.renderPreviewImage(index, e)}*/}
-            {/*            />*/}
-            {/*        ]*/}
-            {/*        */}
-            {/*    )*/}
-            {/*}*/}
         </div>
     )
 

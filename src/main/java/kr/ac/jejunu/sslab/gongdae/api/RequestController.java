@@ -23,7 +23,6 @@ public class RequestController {
 
     @PostMapping(consumes= {MediaType.MULTIPART_FORM_DATA_VALUE})
     public void requestAction(
-//            @RequestBody String string
         @RequestParam("title") String title,
         @RequestParam("place") String place,
         @RequestParam("vrImgUrl") MultipartFile vrImgUrl,

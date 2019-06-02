@@ -21,11 +21,15 @@
 .request-list-content > .sub-list {
     background-color: #ffffff;
     box-shadow: 0 4px 8px #d7d7d7;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
     padding: 16px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin: 16px 0;
+    outline: 0;
     
     border: 0.5px solid #e7e7e7;
 }
@@ -61,6 +65,8 @@
     box-shadow: 0 4px 8px #d7d7d7;
     padding: 16px;
     border: 0.5px solid #e7e7e7;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
     border-radius: 8px;
     display:flex;
     flex-direction: row;
@@ -78,5 +84,19 @@
 }
 .company-item>.estimated-detail {
 
+}
+
+.request-list-content>.sub-list-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.request-list-content>.sub-list-content>.sub-list-item {
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px #e7e7e7;
+    border: 0.5px solid #f7f7f7;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 8px 0;
 }
 
