@@ -19,7 +19,10 @@ public class CompanyReview {
     @JoinColumn(name="company_id")
     @JsonIgnore
     private Company company;
-    private Long clientId;
+    @OneToOne
+    @JoinColumn(name="user")
+    @JsonIgnore
+    private User user;
     private String description;
     private Integer score;
 }
