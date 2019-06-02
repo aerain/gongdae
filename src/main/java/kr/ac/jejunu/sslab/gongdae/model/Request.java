@@ -24,9 +24,9 @@ public class Request {
     @Column(name = "vr_image_url")
     private String imgUrl;
     private Long companySize;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "request_id")
-    @JsonIgnore
-//    @JsonIgnoreProperties(value={"request"})
+//    @JsonIgnore
+    @JsonIgnoreProperties(value={"request"})
     private List<RequestDetail> requestDetailList;
 }

@@ -4,7 +4,6 @@ import '../../css/RequestList.css'
 export default class RequestList extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
             dataSource: {},
             companyList: []

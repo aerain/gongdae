@@ -47,7 +47,7 @@ export default class Home extends Component {
     }
 
     _renderBlock = item => (
-        <Link key={item.id} to={`/request-list/${item.id}`} className="list-item">
+        <Link key={item.id} to={`/request-list/${item.id}`} params={{item}} className="list-item">
             <div className="item-bg" style={{backgroundImage: `url(${item.imgUrl})`}} />
             <div style={{flex: 1}} />
             <div className="item-content">

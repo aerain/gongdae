@@ -19,8 +19,6 @@ import java.io.IOException;
 @RequestMapping("/api/request-auction")
 @RequiredArgsConstructor
 public class RequestController {
-    private final RequestRepository requestRepository;
-    private final RequestDetailRepository requestDetailRepository;
     private final RequestService requestService;
 
     @PostMapping(consumes= {MediaType.MULTIPART_FORM_DATA_VALUE})
@@ -29,8 +27,7 @@ public class RequestController {
         @RequestParam("title") String title,
         @RequestParam("place") String place,
         @RequestParam("vrImgUrl") MultipartFile vrImgUrl,
-        @RequestParam("requestList") String requestList,
-        HttpServletRequest request
+        @RequestParam("requestList") String requestList
         ) throws IOException {
         requestService.saveRequest(title, place, vrImgUrl, requestList);
     }
