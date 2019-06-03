@@ -17,33 +17,35 @@ export default class RequestList extends Component {
         this.getRequestList();
         this.getCompanyList();
     }
+    
     getCompanyList = async () => {
         // Todo Fetch
-        this.setState({
-            companyList: [{
-                id: 1,
-                companyName: '제대루',
-
-            }]
-        })
+        const {id} = this.props.match.params;
+        const uri = `/api/request/${id}/reverse`;
+        try {
+            const companyList = await (await fetch(uri)).json();
+            this.setState({companyList});
+        } catch (err) {
+            console.error(err);
+        }
     }
 
     getDataSource = async () => {
         const {id} = this.props.match.params;
         const uri = `/api/request/${id}`;
         try {
-            const {data} = await (await fetch(uri)).json();
-            this.setState({item: data});
+            const item = await (await fetch(uri)).json();
+            this.setState({item});
         } catch (err) {
             console.error(err);
         }
     }
     getRequestList = async () => {
         const {id} = this.props.match.params;
-        const uri = `/api/request-detail/${id}`;
+        const uri = `/api/request/${id}/detail`;
         try {
-            const {data} = await (await fetch(uri)).json();
-            this.setState({requestList: data})
+            const requestList = await (await fetch(uri)).json();
+            this.setState({requestList})
         } catch (err) {
             console.error(err);
         }
@@ -75,7 +77,6 @@ export default class RequestList extends Component {
                     {
                         this.state.companyList.map(this._renderCompanyItem)
                     }
-                    {this._renderCompanyItem()}
                 </div>
 
             </div>

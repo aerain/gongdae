@@ -1,28 +1,27 @@
 package kr.ac.jejunu.sslab.gongdae.api;
 
-import kr.ac.jejunu.sslab.gongdae.dao.UserRepository;
+import kr.ac.jejunu.sslab.gongdae.model.Estimate;
 import kr.ac.jejunu.sslab.gongdae.model.Request;
-import kr.ac.jejunu.sslab.gongdae.service.FileUploadService;
-import kr.ac.jejunu.sslab.gongdae.dao.RequestDetailRepository;
-import kr.ac.jejunu.sslab.gongdae.dao.RequestRepository;
+import kr.ac.jejunu.sslab.gongdae.model.RequestDetail;
+import kr.ac.jejunu.sslab.gongdae.model.ReverseAuction;
 import kr.ac.jejunu.sslab.gongdae.service.RequestService;
+import kr.ac.jejunu.sslab.gongdae.service.ReverseAuctionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/request")
 @RequiredArgsConstructor
 public class RequestController {
     private final RequestService requestService;
+    private final ReverseAuctionService reverseAuctionService;
 
     @PostMapping(consumes= {MediaType.MULTIPART_FORM_DATA_VALUE})
     public void requestAction(
@@ -35,18 +34,30 @@ public class RequestController {
     }
 
     @GetMapping
-    public Map<String, Object> getRequestList() {
+    public List<Request> getRequestList() {
         Long userId = 1L;
-        return new HashMap<>() {{
-            put("data", requestService.getRequestListByUserId(userId));
-        }};
+        return requestService.getRequestListByUserId(userId);
     }
 
     @GetMapping("/{id}")
-    public Map<String, Object> getRequestById(@PathVariable Long id) {
-        Request request = requestService.getRequestById(id);
-        return new HashMap<>() {{
-            put("data", request);
-        }};
+    public Request getRequestById(@PathVariable Long id) {
+        return requestService.getRequestById(id);
+    }
+
+    @GetMapping("/{id}/detail")
+    public List<RequestDetail> findRequestDetailListByRequestId(@PathVariable Long id) {
+        return requestService.getRequestDetailListByRequestId(id);
+    }
+
+    @GetMapping("/{id}/reverse")
+    public List<ReverseAuction> getReverseAuctionList(@PathVariable("id") Long requestId) {
+        List<ReverseAuction> reverseAuctionList = reverseAuctionService.getListByRequestId(requestId);
+        reverseAuctionList.parallelStream().forEach(item -> {
+            long price = 0;
+            for(Estimate estimate : item.getEstimateList())
+                price += estimate.getPrice();
+            item.setPrice(price);
+        });
+        return reverseAuctionList;
     }
 }

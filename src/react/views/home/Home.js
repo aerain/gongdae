@@ -18,7 +18,7 @@ export default class Home extends Component {
     getList = async () => {
         // TODO fetch list
         let response = await fetch('/api/request');
-        let { data } = await response.json();
+        let data = await response.json();
         this.setState({list: data});
     }
 

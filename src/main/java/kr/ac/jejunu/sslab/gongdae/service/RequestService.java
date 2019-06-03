@@ -26,6 +26,7 @@ import java.util.Optional;
 public class RequestService {
     private final FileUploadService fileUploadService;
     private final RequestRepository requestRepository;
+    private final RequestDetailRepository requestDetailRepository;
     private final UserRepository userRepository;
 
     public Request getRequestById(Long id) {
@@ -61,5 +62,9 @@ public class RequestService {
             request.setCompanySize((long) request.getReverseAuctionList().size());
         });
         return requestList;
+    }
+
+    public List<RequestDetail> getRequestDetailListByRequestId(Long id) {
+        return requestDetailRepository.findAllByrequestId(id);
     }
 }

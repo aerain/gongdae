@@ -24,7 +24,9 @@ public class ReverseAuction {
     @JoinColumn(name = "company_id")
     private Company company;
     @OneToMany
-    @JoinColumn(name = "request_id")
+    @JoinColumn(name = "reverse_auction_id")
     @JsonIgnore
     private List<Estimate> estimateList;
+    @Transient
+    private Long price;
 }
