@@ -18,11 +18,12 @@ public class Request {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
-    @JoinColumn(name="client_id")
-    private User user;
     private String title;
     private String place;
+    @ManyToOne
+    @JoinColumn(name="user_id")
+    @JsonIgnore
+    private User user;
     @Column(name = "vr_image_url")
     private String imgUrl;
     @Transient

@@ -19,12 +19,12 @@ public class User {
     private String email;
     private String password;
     private String name;
-    @OneToMany
-    @JoinColumn(name="client_id")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name="user_id")
     @JsonIgnore
     private List<CompanyReview> companyReviewList;
-    @OneToMany
-    @JoinColumn(name="client_id")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name="user_id")
     @JsonIgnore
     private List<Request> requestList;
 

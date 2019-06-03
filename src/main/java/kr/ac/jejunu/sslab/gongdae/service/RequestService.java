@@ -55,8 +55,8 @@ public class RequestService {
         requestRepository.save(req);
     }
 
-    public List<Request> getRequestListByClientId(Long clientId) {
-        List<Request> requestList = requestRepository.findAllByclientId(clientId);
+    public List<Request> getRequestListByUserId(Long clientId) {
+        List<Request> requestList = requestRepository.findAllByuserId(clientId);
         requestList.parallelStream().forEach(request -> {
             request.setCompanySize((long) request.getReverseAuctionList().size());
         });

@@ -10,5 +10,6 @@ import java.util.List;
 
 @Repository
 public interface RequestRepository extends JpaRepository<Request, Long> {
-    List<Request> findAllByclientId(Long clientId);
+//    @Query(value = "SELECT * FROM request r WHERE r.user_id = :user_id", nativeQuery = true)
+    List<Request> findAllByuserId(@Param("user_id") Long userId);
 }

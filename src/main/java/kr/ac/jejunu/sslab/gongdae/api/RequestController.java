@@ -36,9 +36,9 @@ public class RequestController {
 
     @GetMapping
     public Map<String, Object> getRequestList() {
-        Long clientId = 1L;
+        Long userId = 1L;
         return new HashMap<>() {{
-            put("data", requestService.getRequestListByClientId(clientId));
+            put("data", requestService.getRequestListByUserId(userId));
         }};
     }
 
