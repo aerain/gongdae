@@ -19,8 +19,8 @@ public class CompanyReview {
     @JoinColumn(name="company_id")
     @JsonIgnore
     private Company company;
-    @OneToOne
-    @JoinColumn(name="user")
+    @ManyToOne
+    @JoinColumn(name="client_id")
     @JsonIgnore
     private User user;
     private String description;

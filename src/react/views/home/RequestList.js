@@ -30,7 +30,7 @@ export default class RequestList extends Component {
 
     getDataSource = async () => {
         const {id} = this.props.match.params;
-        const uri = `/api/request-list/${id}`;
+        const uri = `/api/request/${id}`;
         try {
             const {data} = await (await fetch(uri)).json();
             this.setState({item: data});

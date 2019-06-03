@@ -18,7 +18,9 @@ public class Request {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long clientId;
+    @ManyToOne
+    @JoinColumn(name="client_id")
+    private User user;
     private String title;
     private String place;
     @Column(name = "vr_image_url")
@@ -28,7 +30,6 @@ public class Request {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "request_id")
     @JsonIgnore
-//    @JsonIgnoreProperties(value={"request"})
     private List<RequestDetail> requestDetailList;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "request_id")

@@ -1,11 +1,10 @@
 package kr.ac.jejunu.sslab.gongdae.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -19,4 +18,14 @@ public class User {
     private Long id;
     private String email;
     private String password;
+    private String name;
+    @OneToMany
+    @JoinColumn(name="client_id")
+    @JsonIgnore
+    private List<CompanyReview> companyReviewList;
+    @OneToMany
+    @JoinColumn(name="client_id")
+    @JsonIgnore
+    private List<Request> requestList;
+
 }

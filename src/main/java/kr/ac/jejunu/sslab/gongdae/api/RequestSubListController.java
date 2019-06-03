@@ -21,7 +21,7 @@ public class RequestSubListController {
     @GetMapping("/{id}")
     public Map<String, Object> findRequestDetailListByRequestId(@PathVariable Long id) {
         return new HashMap<>() {{
-            put("data", requestDetailRepository.findAllByRequestId(id));
+            put("data", requestDetailRepository.findAllByrequestId(id));
         }};
     }
 }

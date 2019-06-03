@@ -95,7 +95,7 @@ export default class Request extends Component {
 
         delete options.headers['Content-Type'];
         try {
-            let response = await fetch('/api/request-auction', options); 
+            let response = await fetch('/api/request', options);
             console.log(response);
             this.setState({isSaved: true})
         } catch(err) {

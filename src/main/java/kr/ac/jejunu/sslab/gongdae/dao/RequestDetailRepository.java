@@ -12,5 +12,5 @@ import java.util.List;
 
 @Repository
 public interface RequestDetailRepository extends JpaRepository<RequestDetail, Long> {
-    List<RequestDetail> findAllByRequestId(@Param("request_id") Long requestId);
+    List<RequestDetail> findAllByrequestId(@Param("request_id") Long requestId);
 }
