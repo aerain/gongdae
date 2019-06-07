@@ -20,10 +20,10 @@ public class ReverseAuction {
     @JoinColumn(name = "request_id")
     @JsonIgnore
     private Request request;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "company_id")
     private Company company;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "reverse_auction_id")
     @JsonIgnore
     private List<Estimate> estimateList;

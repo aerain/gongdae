@@ -17,7 +17,7 @@ export default class RequestList extends Component {
         this.getRequestList();
         this.getCompanyList();
     }
-    
+
     getCompanyList = async () => {
         // Todo Fetch
         const {id} = this.props.match.params;
@@ -83,13 +83,16 @@ export default class RequestList extends Component {
         );
     }
 
-    _renderCompanyItem = item => (
-        <div className="company-item">
-            <div className="company-name">제대루</div>
-            <div className="estimated-price">500,000원</div>
-            <div className="estimated-detail">상세보기</div>
-        </div>
-    )
+    _renderCompanyItem = item => {
+        let { company, price, id } = item;
+        return (
+            <div className="company-item">
+                <div className="company-name">{company.companyName}</div>
+                <div className="estimated-price">{price}</div>
+                <div className="estimated-detail">상세보기</div>
+            </div>
+        )
+    }
 
     _renderSubList = () => (this.state.requestList.length === 0) ?
         (
