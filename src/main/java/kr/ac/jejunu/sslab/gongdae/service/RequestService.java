@@ -1,23 +1,17 @@
 package kr.ac.jejunu.sslab.gongdae.service;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonParser;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import kr.ac.jejunu.sslab.gongdae.dao.RequestDetailRepository;
-import kr.ac.jejunu.sslab.gongdae.dao.RequestRepository;
-import kr.ac.jejunu.sslab.gongdae.dao.UserRepository;
+import kr.ac.jejunu.sslab.gongdae.repository.RequestDetailRepository;
+import kr.ac.jejunu.sslab.gongdae.repository.RequestRepository;
+import kr.ac.jejunu.sslab.gongdae.repository.UserRepository;
 import kr.ac.jejunu.sslab.gongdae.model.Request;
 import kr.ac.jejunu.sslab.gongdae.model.RequestDetail;
-import kr.ac.jejunu.sslab.gongdae.model.User;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 

@@ -20,6 +20,7 @@ public class Request {
     private Long id;
     private String title;
     private String place;
+    private Boolean sold;
     @ManyToOne
     @JoinColumn(name="user_id")
     @JsonIgnore

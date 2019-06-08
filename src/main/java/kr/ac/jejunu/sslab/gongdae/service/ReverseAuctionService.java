@@ -1,8 +1,9 @@
 package kr.ac.jejunu.sslab.gongdae.service;
 
-import kr.ac.jejunu.sslab.gongdae.dao.ReverseAuctionRepository;
+import kr.ac.jejunu.sslab.gongdae.repository.ReverseAuctionRepository;
 import kr.ac.jejunu.sslab.gongdae.model.Estimate;
 import kr.ac.jejunu.sslab.gongdae.model.ReverseAuction;
+import kr.ac.jejunu.sslab.gongdae.vo.ReverseAuctionVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +15,7 @@ import java.util.Optional;
 public class ReverseAuctionService {
     private final ReverseAuctionRepository reverseAuctionRepository;
 
-    public ReverseAuction getReverseAuctionbyId(Long id) {
+    public ReverseAuctionVO getReverseAuctionbyId(Long id) {
         Optional<ReverseAuction> reverseAuctionOptional = reverseAuctionRepository.findById(id);
         if(!reverseAuctionOptional.isPresent())
             return null;
@@ -22,7 +23,11 @@ public class ReverseAuctionService {
         long price = 0;
         for(Estimate estimate : reverseAuction.getEstimateList())
             price += estimate.getPrice();
-        return reverseAuction;
+        reverseAuction.setPrice(price);
+        return ReverseAuctionVO.builder()
+                .reverseAuction(reverseAuction)
+                .estimateList(reverseAuction.getEstimateList())
+                .build();
     }
 
     public List<ReverseAuction> getListByRequestId(Long requestId) {

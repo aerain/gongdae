@@ -1,0 +1,62 @@
+.reverse-request {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-top: calc(2rem + 16px);
+    padding: 0 16px;
+}
+
+.reverse-request > .title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 32px 8px;
+}
+
+.reverse-request > .vr-image {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 50%;
+    height: 240px;
+}
+
+.reverse-request > .estimated-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 32px 0 16px 0;
+}
+
+.reverse-request > .estimated-item {
+    display: flex;
+    padding: 16px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px #e7e7e7;
+    border-radius: 8px;
+    overflow: hidden;
+    align-items: center;
+    margin: 8px 0;
+    border: 0.5px solid #f7f7f7;
+}
+
+.reverse-request > .estimated-item > * {
+    padding: 0 8px;
+}
+.reverse-request > .estimated-item > .item-title {
+    flex: 1;
+}
+
+.reverse-request > .total-price {
+    text-align: right;
+    font-size: 1.5rem;
+    margin: 32px 0;
+}
+
+.reverse-request > .reverse-submit {
+    outline: 0;
+    border: 0.5px solid #f7f7f7;
+    box-shadow: 0 4px 8px #e7e7e7;
+    background-color: #ffffff;
+    padding: 16px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 32px 0;
+}

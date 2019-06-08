@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Header from "../components/Header";
 import '../../css/RequestList.css'
-export default class RequestList extends Component {
+export default class RequestDetail extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -84,12 +85,13 @@ export default class RequestList extends Component {
     }
 
     _renderCompanyItem = item => {
+        let { match } = this.props;
         let { company, price, id } = item;
         return (
             <div className="company-item">
                 <div className="company-name">{company.companyName}</div>
                 <div className="estimated-price">{price}</div>
-                <div className="estimated-detail">상세보기</div>
+                <Link to={`/reverse/${id}`} className="estimated-detail">상세보기</Link>
             </div>
         )
     }

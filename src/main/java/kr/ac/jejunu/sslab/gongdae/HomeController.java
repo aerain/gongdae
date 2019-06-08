@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping(value={"/", "/request/**", "/request-list/**"})
+@RequestMapping(value={"/", "/request/**", "/list/**", "/reverse/**"})
 public class HomeController {
     @GetMapping
     public String home() {

@@ -1,4 +1,4 @@
-package kr.ac.jejunu.sslab.gongdae.dao;
+package kr.ac.jejunu.sslab.gongdae.repository;
 
 import kr.ac.jejunu.sslab.gongdae.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,6 +1,7 @@
 package kr.ac.jejunu.sslab.gongdae.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -18,12 +19,13 @@ public class ReverseAuction {
     private Long id;
     @ManyToOne
     @JoinColumn(name = "request_id")
-    @JsonIgnore
+    @JsonIgnoreProperties(value={"companySize"})
     private Request request;
     @ManyToOne
     @JoinColumn(name = "company_id")
+    @JsonIgnoreProperties(value = {"email", "password", "description"})
     private Company company;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "reverse_auction_id")
     @JsonIgnore
     private List<Estimate> estimateList;
