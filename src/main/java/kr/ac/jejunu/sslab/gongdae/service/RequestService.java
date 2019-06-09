@@ -79,6 +79,8 @@ public class RequestService {
 
         // 구매 확정
         reverseAuction.setChosen(true);
-        return;
+        // cascade
+        reverseAuction.getRequest().setSold(true);
+        reverseAuctionRepository.save(reverseAuction);
     }
 }
