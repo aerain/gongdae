@@ -34,7 +34,7 @@ export default class ReverseRequest extends Component {
 
     render() {
         if(this.state.dataSource === null) return (<div>안돼</div>)
-        let {reverseAuction, estimateList} = this.state.dataSource;
+        let {company, request, estimateList, price} = this.state.dataSource;
         return (
             <div className="reverse-request">
                 <Header
@@ -42,15 +42,15 @@ export default class ReverseRequest extends Component {
                     onClick={this.goBack}
                 />
                 <span className="title">
-                        <span className="company-name">{reverseAuction.company.companyName}</span>
+                        <span className="company-name">{company.companyName}</span>
                         견적
                     </span>
-                <div className="vr-image" style={{backgroundImage: `url(${reverseAuction.request.imgUrl}`}}/>
+                <div className="vr-image" style={{backgroundImage: `url(${request.imgUrl}`}}/>
                 <span className="estimated-title">견적서</span>
                 {
                     estimateList.map(this._renderEstimatedList)
                 }
-                <span className="total-price">도합 {reverseAuction.price}원</span>
+                <span className="total-price">도합 {price}원</span>
                 <button className="reverse-submit" onClick={this.submit}>견적선택하기</button>
             </div>
         )

@@ -12,22 +12,23 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name="reverse_auction")
+@Entity
+@Table(name="reverse_auction")
 public class ReverseAuction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
+    @Column(name = "chosen", insertable = false, columnDefinition = "DEFAULT 0")
+    private Boolean chosen;
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "request_id")
     @JsonIgnoreProperties(value={"companySize"})
     private Request request;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "company_id")
     @JsonIgnoreProperties(value = {"email", "password", "description"})
     private Company company;
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "reverse_auction_id")
-    @JsonIgnore
+    @Transient
     private List<Estimate> estimateList;
     @Transient
     private Long price;

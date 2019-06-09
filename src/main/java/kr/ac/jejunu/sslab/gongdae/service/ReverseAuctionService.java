@@ -1,5 +1,6 @@
 package kr.ac.jejunu.sslab.gongdae.service;
 
+import kr.ac.jejunu.sslab.gongdae.repository.EstimateRepository;
 import kr.ac.jejunu.sslab.gongdae.repository.ReverseAuctionRepository;
 import kr.ac.jejunu.sslab.gongdae.model.Estimate;
 import kr.ac.jejunu.sslab.gongdae.model.ReverseAuction;
@@ -14,23 +15,23 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ReverseAuctionService {
     private final ReverseAuctionRepository reverseAuctionRepository;
-
-    public ReverseAuctionVO getReverseAuctionbyId(Long id) {
+    private final EstimateRepository estimateRepository;
+    public ReverseAuction getReverseAuctionbyId(Long id) {
         Optional<ReverseAuction> reverseAuctionOptional = reverseAuctionRepository.findById(id);
         if(!reverseAuctionOptional.isPresent())
             return null;
+
         ReverseAuction reverseAuction = reverseAuctionOptional.get();
-        long price = 0;
-        for(Estimate estimate : reverseAuction.getEstimateList())
-            price += estimate.getPrice();
-        reverseAuction.setPrice(price);
-        return ReverseAuctionVO.builder()
-                .reverseAuction(reverseAuction)
-                .estimateList(reverseAuction.getEstimateList())
-                .build();
+        reverseAuction.setPrice(estimateRepository.sumByReverseAuctionId(id));
+        reverseAuction.setEstimateList(estimateRepository.findAllByReverseAuctionId(id));
+        System.out.println(reverseAuction.getCompany().getCompanyName());
+        return reverseAuction;
     }
 
     public List<ReverseAuction> getListByRequestId(Long requestId) {
-        return reverseAuctionRepository.findAllByrequestId(requestId);
+        List<ReverseAuction> reverseAuctionList = reverseAuctionRepository.findAllByrequestId(requestId);
+        reverseAuctionList.parallelStream().forEach(item ->
+                item.setPrice(estimateRepository.sumByReverseAuctionId(item.getId())));
+        return reverseAuctionList;
     }
 }

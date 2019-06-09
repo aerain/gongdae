@@ -4,6 +4,7 @@ import kr.ac.jejunu.sslab.gongdae.model.Estimate;
 import kr.ac.jejunu.sslab.gongdae.model.Request;
 import kr.ac.jejunu.sslab.gongdae.model.RequestDetail;
 import kr.ac.jejunu.sslab.gongdae.model.ReverseAuction;
+import kr.ac.jejunu.sslab.gongdae.payload.ConfirmPayLoad;
 import kr.ac.jejunu.sslab.gongdae.service.RequestService;
 import kr.ac.jejunu.sslab.gongdae.service.ReverseAuctionService;
 import lombok.RequiredArgsConstructor;
@@ -31,6 +32,7 @@ public class RequestController {
         @RequestParam("requestList") String requestList
         ) throws IOException {
         requestService.saveRequest(title, place, vrImgUrl, requestList);
+
     }
 
     @GetMapping
@@ -44,6 +46,11 @@ public class RequestController {
         return requestService.getRequestById(id);
     }
 
+    @PostMapping(path="/{id}", consumes=MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public void confirmRequest(@RequestBody ConfirmPayLoad confirmPayLoad) {
+        requestService.confirmRequest(confirmPayLoad);
+    }
+
     @GetMapping("/{id}/detail")
     public List<RequestDetail> findRequestDetailListByRequestId(@PathVariable Long id) {
         return requestService.getRequestDetailListByRequestId(id);
@@ -51,13 +58,6 @@ public class RequestController {
 
     @GetMapping("/{id}/reverse")
     public List<ReverseAuction> getReverseAuctionList(@PathVariable("id") Long requestId) {
-        List<ReverseAuction> reverseAuctionList = reverseAuctionService.getListByRequestId(requestId);
-        reverseAuctionList.parallelStream().forEach(item -> {
-            long price = 0;
-            for(Estimate estimate : item.getEstimateList())
-                price += estimate.getPrice();
-            item.setPrice(price);
-        });
-        return reverseAuctionList;
+        return reverseAuctionService.getListByRequestId(requestId);
     }
 }

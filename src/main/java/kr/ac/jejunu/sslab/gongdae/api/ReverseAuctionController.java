@@ -19,7 +19,7 @@ public class ReverseAuctionController {
     private final ReverseAuctionService reverseAuctionService;
 
     @GetMapping("/{id}")
-    public ReverseAuctionVO getReverseAuctionById(@PathVariable Long id) {
+    public ReverseAuction getReverseAuctionById(@PathVariable Long id) {
         return reverseAuctionService.getReverseAuctionbyId(id);
     }
 }

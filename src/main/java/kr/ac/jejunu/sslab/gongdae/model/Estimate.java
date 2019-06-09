@@ -10,12 +10,13 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "estimate_list")
+@Entity
+@Table(name = "estimate_list")
 public class Estimate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="reverse_auction_id")
     @JsonIgnore
     private ReverseAuction reverseAuction;

@@ -10,4 +10,6 @@ import java.util.List;
 @Repository
 public interface ReverseAuctionRepository extends JpaRepository<ReverseAuction, Long> {
     List<ReverseAuction> findAllByrequestId(@Param("request_id") Long requestId);
+
+    Long countByrequestId(Long id);
 }

@@ -11,12 +11,13 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name="request_sub")
+@Entity
+@Table(name="request_sub")
 public class RequestDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="request_id")
     @JsonIgnore
     private Request request;
