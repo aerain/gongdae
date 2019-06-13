@@ -1,7 +1,7 @@
 CREATE database gongdae;
 use gongdae;
 
-CREATE table user(
+CREATE table member(
     id int(11) PRIMARY KEY AUTO_INCREMENT NOT NULL,
     email MEDIUMTEXT NOT NULL,
     password MEDIUMTEXT NOT NULL,
@@ -21,7 +21,7 @@ CREATE table request(
     title VARCHAR(255) NOT NULL,
     place VARCHAR(255) NOT NULL,
     vr_image_url MEDIUMTEXT NOT NULL,
-    company_size int(3) NOT NULL DEFAULT 0,
+    sold TINYINT NOT NULL DEFAULT 0,
     FOREIGN KEY (user_id) REFERENCES user(id) on update cascade
 );
 

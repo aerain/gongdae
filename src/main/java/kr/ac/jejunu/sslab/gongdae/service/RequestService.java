@@ -46,7 +46,7 @@ public class RequestService {
                 .title(title)
                 .place(place)
                 .imgUrl(imagePath)
-                .user(userRepository.findByName(name)).build();
+                .member(userRepository.findByName(name)).build();
 
         // cascade
         requestDetailList.parallelStream().forEach(requestDetail ->
@@ -59,7 +59,7 @@ public class RequestService {
     }
 
     public List<Request> getRequestListByUserId(Long clientId) {
-        List<Request> requestList = requestRepository.findAllByuserId(clientId);
+        List<Request> requestList = requestRepository.findAllOnProgressByuserId(clientId);
         requestList.parallelStream().forEach(request ->
                 request.setCompanySize(reverseAuctionRepository.countByrequestId(request.getId())));
         return requestList;
@@ -70,7 +70,8 @@ public class RequestService {
     }
 
     public void confirmRequest(ConfirmPayLoad confirmPayLoad) {
-        Optional<ReverseAuction> reverseAuctionOptional = reverseAuctionRepository.findById(confirmPayLoad.getReverseId());
+        System.out.println(confirmPayLoad.getReverseAuctionId());
+        Optional<ReverseAuction> reverseAuctionOptional = reverseAuctionRepository.findById(confirmPayLoad.getReverseAuctionId());
         if(reverseAuctionOptional.isEmpty()) return;
 
         ReverseAuction reverseAuction = reverseAuctionOptional.get();

@@ -5,5 +5,5 @@ import lombok.Getter;
 @Getter
 public class ConfirmPayLoad {
     private Long requestId;
-    private Long reverseId;
+    private Long reverseAuctionId;
 }

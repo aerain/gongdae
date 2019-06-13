@@ -7,7 +7,6 @@ import kr.ac.jejunu.sslab.gongdae.model.ReverseAuction;
 import kr.ac.jejunu.sslab.gongdae.payload.ConfirmPayLoad;
 import kr.ac.jejunu.sslab.gongdae.service.RequestService;
 import kr.ac.jejunu.sslab.gongdae.service.ReverseAuctionService;
-import kr.ac.jejunu.sslab.gongdae.vo.PostVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -47,7 +46,7 @@ public class RequestController {
         return requestService.getRequestById(id);
     }
 
-    @PostMapping(path="/{id}", consumes=MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @PostMapping(path="/confirm", consumes=MediaType.APPLICATION_JSON_UTF8_VALUE)
     public void confirmRequest(@RequestBody ConfirmPayLoad confirmPayLoad) {
         requestService.confirmRequest(confirmPayLoad);
     }

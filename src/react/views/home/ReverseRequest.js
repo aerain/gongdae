@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Redirect} from 'react-router-dom';
 import Header from "../components/Header";
 import '../../css/ReverseRequest.css';
 
@@ -8,7 +9,8 @@ export default class ReverseRequest extends Component {
         super(props);
 
         this.state = {
-            dataSource: null
+            dataSource: null,
+            isConfirm: false
         }
     }
     componentDidMount = async () => {
@@ -33,8 +35,9 @@ export default class ReverseRequest extends Component {
     )
 
     render() {
-        if(this.state.dataSource === null) return (<div>안돼</div>)
-        let {company, request, estimateList, price} = this.state.dataSource;
+        if(this.state.isConfirm) return <Redirect to="/" />;
+        if(this.state.dataSource === null) return (<div>안돼</div>);
+        let {id, company, request, estimateList, price} = this.state.dataSource;
         return (
             <div className="reverse-request">
                 <Header
@@ -51,12 +54,28 @@ export default class ReverseRequest extends Component {
                     estimateList.map(this._renderEstimatedList)
                 }
                 <span className="total-price">도합 {price}원</span>
-                <button className="reverse-submit" onClick={this.submit}>견적선택하기</button>
+                <button className="reverse-submit" onClick={e => this.submit(request.id, id)}>견적선택하기</button>
             </div>
         )
     }
 
-    submit = () => {
-        alert("hi");
+    submit = async (requestId, reverseAuctionId) => {
+        const uri = `/api/request/confirm`;
+        try {
+            let response = await fetch(uri, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Charset': 'UTF-8'
+                },
+                body: JSON.stringify({ requestId, reverseAuctionId })
+            });
+
+            this.setState(state => ({isConfirm: !state.isConfirm}))
+        } catch (err) {
+            console.error(err);
+        }
+
+
     }
 }

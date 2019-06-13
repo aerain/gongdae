@@ -22,7 +22,7 @@ public class CompanyReview {
     @ManyToOne
     @JoinColumn(name="client_id")
     @JsonIgnore
-    private User user;
+    private Member member;
     private String description;
     private Integer score;
 }

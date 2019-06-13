@@ -13,7 +13,7 @@ import java.util.List;
 @Builder
 @Entity
 @Table(name = "user")
-public class User {
+public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -28,5 +28,4 @@ public class User {
     @JoinColumn(name="user_id")
     @JsonIgnore
     private List<Request> requestList;
-
 }

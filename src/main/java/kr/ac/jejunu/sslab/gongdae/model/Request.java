@@ -1,11 +1,9 @@
 package kr.ac.jejunu.sslab.gongdae.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.xml.stream.events.Comment;
 import java.util.List;
 
 @Getter
@@ -23,9 +21,9 @@ public class Request {
     private String place;
     private Boolean sold;
     @ManyToOne
-    @JoinColumn(name="user_id")
+    @JoinColumn(name="member_id")
     @JsonIgnore
-    private User user;
+    private Member member;
     @Column(name = "vr_image_url")
     private String imgUrl;
     @Transient
