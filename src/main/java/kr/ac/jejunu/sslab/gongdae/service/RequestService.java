@@ -41,12 +41,12 @@ public class RequestService {
         String imagePath = fileUploadService.uploadFile(vrImgUrl);
 
         // Todo 계정 연동
-        String name = "청길";
+        String name = "aerain";
         Request req = Request.builder()
                 .title(title)
                 .place(place)
                 .imgUrl(imagePath)
-                .member(userRepository.findByName(name)).build();
+                .member(userRepository.findByName(name).get()).build();
 
         // cascade
         requestDetailList.parallelStream().forEach(requestDetail ->
