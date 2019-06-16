@@ -46,7 +46,7 @@ public class RequestService {
                 .title(title)
                 .place(place)
                 .imgUrl(imagePath)
-                .member(userRepository.findByName(name).get()).build();
+                .member(userRepository.findByusername(name).get()).build();
 
         // cascade
         requestDetailList.parallelStream().forEach(requestDetail ->

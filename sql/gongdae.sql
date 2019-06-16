@@ -38,6 +38,7 @@ create table reverse_auction(
     id int(11) PRIMARY KEY AUTO_INCREMENT NOT NULL,
     company_id int(11) NOT NULL,
     request_id int(11) NOT NULL,
+    chosen TINYINT NOT NULL DEFAULT 0,
     FOREIGN KEY (request_id) REFERENCES request(id) on update cascade,
     FOREIGN KEY (company_id) references company(id) on update cascade
 );

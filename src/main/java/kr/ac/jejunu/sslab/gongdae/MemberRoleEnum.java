@@ -7,7 +7,6 @@ public enum MemberRoleEnum {
 
     private final String role;
     private MemberRoleEnum(String role) { this.role = role; }
-
     public String getRole() {
         return role;
     }

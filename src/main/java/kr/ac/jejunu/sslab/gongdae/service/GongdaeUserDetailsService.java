@@ -12,20 +12,14 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class GongUserDetailService implements UserDetailsService {
+public class GongdaeUserDetailsService implements UserDetailsService {
 
     private final UserRepository userRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String param) throws UsernameNotFoundException {
-        Optional<Member> member = null;
-        if(param.contains("@"))
-           member = userRepository.findByemail(param);
-        else
-            member = userRepository.findByName(param);
-
-        if(member.isEmpty()) throw new UsernameNotFoundException(param);
-
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Optional<Member> member = userRepository.findByusername(username);
+        if(member.isEmpty()) throw new UsernameNotFoundException(username);
         return member.get();
     }
 }

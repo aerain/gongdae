@@ -91,7 +91,7 @@ export default class RequestDetail extends Component {
             <div className="company-item">
                 <div className="company-name">{company.companyName}</div>
                 <div className="estimated-price">{price}</div>
-                <Link to={`/reverse/${id}`} className="estimated-detail">상세보기</Link>
+                <Link to={`${match.url}/reverse/${id}`} className="estimated-detail">상세보기</Link>
             </div>
         )
     }

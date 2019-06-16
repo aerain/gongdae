@@ -1,6 +1,5 @@
 package kr.ac.jejunu.sslab.gongdae.api;
 
-import kr.ac.jejunu.sslab.gongdae.model.Estimate;
 import kr.ac.jejunu.sslab.gongdae.model.Request;
 import kr.ac.jejunu.sslab.gongdae.model.RequestDetail;
 import kr.ac.jejunu.sslab.gongdae.model.ReverseAuction;
@@ -9,13 +8,12 @@ import kr.ac.jejunu.sslab.gongdae.service.RequestService;
 import kr.ac.jejunu.sslab.gongdae.service.ReverseAuctionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/request")
@@ -25,39 +23,40 @@ public class RequestController {
     private final ReverseAuctionService reverseAuctionService;
 
     @PostMapping(consumes= {MediaType.MULTIPART_FORM_DATA_VALUE})
-    public void requestAction(
+    public ResponseEntity requestAction(
         @RequestParam("title") String title,
         @RequestParam("place") String place,
         @RequestParam("vrImgUrl") MultipartFile vrImgUrl,
         @RequestParam("requestList") String requestList
         ) throws IOException {
         requestService.saveRequest(title, place, vrImgUrl, requestList);
-
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping
-    public List<Request> getRequestList() {
-        Long userId = 1L;
-        return requestService.getRequestListByUserId(userId);
+    public ResponseEntity<List<Request>> getRequestList() {
+        Long userId = 2L;
+        return ResponseEntity.ok(requestService.getRequestListByUserId(userId));
     }
 
     @GetMapping("/{id}")
-    public Request getRequestById(@PathVariable Long id) {
-        return requestService.getRequestById(id);
+    public ResponseEntity<Request> getRequestById(@PathVariable Long id) {
+        return ResponseEntity.ok(requestService.getRequestById(id));
     }
 
     @PostMapping(path="/confirm", consumes=MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public void confirmRequest(@RequestBody ConfirmPayLoad confirmPayLoad) {
+    public ResponseEntity confirmRequest(@RequestBody ConfirmPayLoad confirmPayLoad) {
         requestService.confirmRequest(confirmPayLoad);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/{id}/detail")
-    public List<RequestDetail> findRequestDetailListByRequestId(@PathVariable Long id) {
-        return requestService.getRequestDetailListByRequestId(id);
+    public ResponseEntity<List<RequestDetail>> findRequestDetailListByRequestId(@PathVariable Long id) {
+        return ResponseEntity.ok(requestService.getRequestDetailListByRequestId(id));
     }
 
     @GetMapping("/{id}/reverse")
-    public List<ReverseAuction> getReverseAuctionList(@PathVariable("id") Long requestId) {
-        return reverseAuctionService.getListByRequestId(requestId);
+    public ResponseEntity<List<ReverseAuction>> getReverseAuctionList(@PathVariable("id") Long requestId) {
+        return ResponseEntity.ok(reverseAuctionService.getListByRequestId(requestId));
     }
 }

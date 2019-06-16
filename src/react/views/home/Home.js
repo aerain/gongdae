@@ -23,7 +23,7 @@ export default class Home extends Component {
     }
 
     _renderFloatButton = () => (
-        <Link to="/request" className="add-float">
+        <Link to={`${this.props.match.url}/request`} className="add-float">
             <div className="material-icons add-icon">
                 add
             </div>
@@ -47,7 +47,7 @@ export default class Home extends Component {
     }
 
     _renderBlock = item => (
-        <Link key={item.id} to={`/list/${item.id}`} className="list-item">
+        <Link key={item.id} to={`${this.props.match.url}/list/${item.id}`} className="list-item">
             <div className="item-bg" style={{backgroundImage: `url(${item.imgUrl})`}} />
             <div style={{flex: 1}} />
             <div className="item-content">

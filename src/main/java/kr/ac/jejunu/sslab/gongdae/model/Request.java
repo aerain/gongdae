@@ -19,6 +19,7 @@ public class Request {
     private Long id;
     private String title;
     private String place;
+    @Column(insertable = false, columnDefinition = "DEFAULT 0")
     private Boolean sold;
     @ManyToOne
     @JoinColumn(name="member_id")

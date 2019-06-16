@@ -1,6 +1,7 @@
 package kr.ac.jejunu.sslab.gongdae.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import kr.ac.jejunu.sslab.gongdae.MemberRoleEnum;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -24,19 +25,22 @@ public class Member implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String email;
-    @Getter(AccessLevel.NONE)
     private String password;
-    private String name;
+    @Column(name = "name")
+    private String username;
     @Column(insertable = false, columnDefinition = "DEFAULT 1 NOT NULL")
+    @JsonIgnore
     private Boolean enabled;
 //    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 //    @JoinColumn(name="user_id")
 //    @JsonIgnore
     @Transient
-    private List<CompanyReview> companyReviewList;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name="member_id")
     @JsonIgnore
+    private List<CompanyReview> companyReviewList;
+//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    @JoinColumn(name="member_id")
+    @JsonIgnore
+    @Transient
     private List<Request> requestList;
 
     @Override
@@ -49,26 +53,19 @@ public class Member implements UserDetails {
     }
 
     @Override
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
-    public String getUsername() {
-        return email;
-    }
-
-    @Override
+    @JsonIgnore
     public boolean isAccountNonExpired() {
         return true;
     }
 
     @Override
+    @JsonIgnore
     public boolean isAccountNonLocked() {
         return true;
     }
 
     @Override
+    @JsonIgnore
     public boolean isCredentialsNonExpired() {
         return true;
     }

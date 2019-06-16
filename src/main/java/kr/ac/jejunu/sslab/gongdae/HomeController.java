@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping
 public class HomeController {
-    @GetMapping(value={"/", "/request/**", "/list/**", "/reverse/**"})
+    @GetMapping(value={"/", "/user/**"})
     public String home() {
         return "index";
     }
