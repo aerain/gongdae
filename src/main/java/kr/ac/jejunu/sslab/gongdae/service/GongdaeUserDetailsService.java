@@ -2,7 +2,10 @@ package kr.ac.jejunu.sslab.gongdae.service;
 
 import kr.ac.jejunu.sslab.gongdae.model.Member;
 import kr.ac.jejunu.sslab.gongdae.repository.UserRepository;
+import kr.ac.jejunu.sslab.gongdae.vo.SessionIdVO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -22,4 +25,6 @@ public class GongdaeUserDetailsService implements UserDetailsService {
         if(member.isEmpty()) throw new UsernameNotFoundException(username);
         return member.get();
     }
+
+
 }

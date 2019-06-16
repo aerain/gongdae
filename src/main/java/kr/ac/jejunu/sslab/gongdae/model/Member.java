@@ -25,25 +25,21 @@ public class Member implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String email;
+    @JsonIgnore
     private String password;
     @Column(name = "name")
     private String username;
     @Column(insertable = false, columnDefinition = "DEFAULT 1 NOT NULL")
     @JsonIgnore
     private Boolean enabled;
-//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    @JoinColumn(name="user_id")
-//    @JsonIgnore
     @Transient
     @JsonIgnore
     private List<CompanyReview> companyReviewList;
-//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    @JoinColumn(name="member_id")
     @JsonIgnore
     @Transient
     private List<Request> requestList;
-
     @Override
+    @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
         // Todo USER
         Collection<GrantedAuthority> auth = new ArrayList<>() {{
@@ -51,28 +47,23 @@ public class Member implements UserDetails {
         }};
         return auth;
     }
-
     @Override
     @JsonIgnore
     public boolean isAccountNonExpired() {
         return true;
     }
-
     @Override
     @JsonIgnore
     public boolean isAccountNonLocked() {
         return true;
     }
-
     @Override
     @JsonIgnore
     public boolean isCredentialsNonExpired() {
         return true;
     }
-
     @Override
     public boolean isEnabled() {
         return enabled;
     }
-
 }

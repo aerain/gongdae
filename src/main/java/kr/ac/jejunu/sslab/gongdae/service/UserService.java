@@ -26,4 +26,17 @@ public class UserService {
         // Todo Role
         userRepository.save(member);
     }
+
+    public Long getCurrentSessionId() {
+        Member member = getCurrentUser();
+        if(member != null) return member.getId();
+        return 0L;
+    }
+
+    private Member getCurrentUser() {
+        Object member = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if(member instanceof Member)
+            return (Member) member;
+        return null;
+    }
 }
