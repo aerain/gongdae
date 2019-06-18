@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import Header from '../components/Header';
-import '../../css/Request.css'
-import VRImage from '../components/VRImage';
+import Header from '../Header';
+import '../../../css/Request.css'
+import VRImage from '../../components/VRImage';
 import { Redirect } from 'react-router-dom';
 
 export default class Request extends Component {

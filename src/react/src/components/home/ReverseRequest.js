@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Redirect} from 'react-router-dom';
-import Header from "../components/Header";
-import '../../css/ReverseRequest.css';
+import Header from "../Header";
+import '../../../css/ReverseRequest.css';
 
 export default class ReverseRequest extends Component {
 

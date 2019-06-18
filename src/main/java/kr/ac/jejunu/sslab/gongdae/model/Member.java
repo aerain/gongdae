@@ -32,6 +32,8 @@ public class Member implements UserDetails {
     @Column(insertable = false, columnDefinition = "DEFAULT 1 NOT NULL")
     @JsonIgnore
     private Boolean enabled;
+    @JsonIgnore
+    private Integer type;
     @Transient
     @JsonIgnore
     private List<CompanyReview> companyReviewList;
@@ -41,9 +43,23 @@ public class Member implements UserDetails {
     @Override
     @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        // Todo USER
+        String role;
+        switch(type) {
+            case 0:
+                role = MemberRoleEnum.user.getRole();
+                break;
+            case 1:
+                role = MemberRoleEnum.company.getRole();
+                break;
+            case 2:
+                role = MemberRoleEnum.admin.getRole();
+                break;
+            default:
+                role = "NO";
+                break;
+        }
         Collection<GrantedAuthority> auth = new ArrayList<>() {{
-            add(new SimpleGrantedAuthority(MemberRoleEnum.user.getRole()));
+            add(new SimpleGrantedAuthority(role));
         }};
         return auth;
     }

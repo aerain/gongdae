@@ -20,11 +20,15 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userService;
+    private final CustomSuccessHandler customSuccessHandler;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
+                // Main-UI
+                .antMatchers("/")
+                .permitAll()
                 // Swagger-UI
                 .antMatchers("/v2/api-docs",
                         "/swagger-resources/**",
@@ -34,6 +38,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/**").authenticated()
                 .and()
             .formLogin()
+                .loginPage("/login")
+                .permitAll()
+                .successHandler(customSuccessHandler)
+                .failureForwardUrl("/login?error")
                 .and()
             .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))

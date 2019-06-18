@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
-import '../../css/Home.css'
-import Header from '../components/Header';
+import '../../../css/Home.css'
+import Header from '../../components/Header';
 export default class Home extends Component {
     constructor(props) {
         super(props);

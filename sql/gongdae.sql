@@ -5,7 +5,9 @@ CREATE table member(
     id int(11) PRIMARY KEY AUTO_INCREMENT NOT NULL,
     email MEDIUMTEXT NOT NULL,
     password MEDIUMTEXT NOT NULL,
-    name VARCHAR(20) NOT NULL
+    name VARCHAR(20) NOT NULL,
+    enabled TINYINT NOT NULL DEFAULT 1,
+    type INT NOT NULL
 );
 
 create table company(

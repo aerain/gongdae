@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Header from "../components/Header";
-import '../../css/RequestList.css'
+import Header from "../Header";
+import '../../../css/RequestList.css'
 export default class RequestDetail extends Component {
     constructor(props) {
         super(props);
