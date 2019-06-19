@@ -1,6 +1,7 @@
 package kr.ac.jejunu.sslab.gongdae.api;
 
 import kr.ac.jejunu.sslab.gongdae.model.Member;
+import kr.ac.jejunu.sslab.gongdae.payload.MemberPayLoad;
 import kr.ac.jejunu.sslab.gongdae.service.GongdaeUserDetailsService;
 import kr.ac.jejunu.sslab.gongdae.service.UserService;
 import kr.ac.jejunu.sslab.gongdae.vo.SessionIdVO;
@@ -27,7 +28,7 @@ public class MemberController {
 
     @GetMapping("/id")
     public ResponseEntity<SessionIdVO> getCurrentSessionId() {
-        return ResponseEntity.ok(SessionIdVO.builder().
-                id(userService.getCurrentSessionId()).build());
+        return ResponseEntity.ok(SessionIdVO.builder()
+                .id(userService.getCurrentSessionId()).build());
     }
 }

@@ -25,7 +25,6 @@ public class Member implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String email;
-    @JsonIgnore
     private String password;
     @Column(name = "name")
     private String username;

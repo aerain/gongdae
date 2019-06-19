@@ -1,0 +1,35 @@
+.signup-content {
+    flex: 1;
+    margin-top: calc(2rem + 16px);
+    padding: 32px;
+}
+
+.signup-content > .signup-form {
+    display: flex;
+    flex-direction: column;
+}
+.signup-content > .signup-form > label {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.signup-content > .signup-form > input {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 16px 0;
+    padding: 16px 0;
+}
+.signup-content > .signup-form > .signup-submit {
+    outline: 0;
+    background-color: #e7e7e7;
+    border: 0;
+    font-size: 1.2rem;
+    padding: 16px;
+    box-shadow: 0 0 8px #d7d7d7;
+}
+.signup-content > .signup-form > .type-row {
+    display: flex;
+    font-size: 1.2rem;
+}
+.signup-content > .signup-form > .type-row > label {
+    flex: 1;
+}

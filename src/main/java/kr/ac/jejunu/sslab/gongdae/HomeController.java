@@ -8,11 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping
 public class HomeController {
-    @GetMapping(value={"/", "/user/**", "/login"})
+    @GetMapping(value={"/", "/user/**", "/login", "/company/**"})
     public String home() {
         return "index";
     }
-    @PostMapping("/signup")
-    public String signup() { return "index"; }
-
 }

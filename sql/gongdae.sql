@@ -11,11 +11,9 @@ CREATE table member(
 );
 
 create table company(
-    id int(11) PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    email MEDIUMTEXT NOT NULL,
-    password MEDIUMTEXT NOT NULL,
-    company_name varchar(255) NOT NULL,
-    description MEDIUMTEXT NOT NULL
+    member_id int(11) PRIMARY KEY NOT NULL,
+    description MEDIUMTEXT NOT NULL,
+    FOREIGN KEY (member_id) REFERENCES member(id) on update cascade
 );
 
 CREATE table request(
@@ -42,7 +40,7 @@ create table reverse_auction(
     request_id int(11) NOT NULL,
     chosen TINYINT NOT NULL DEFAULT 0,
     FOREIGN KEY (request_id) REFERENCES request(id) on update cascade,
-    FOREIGN KEY (company_id) references company(id) on update cascade
+    FOREIGN KEY (company_id) references company(member_id) on update cascade
 );
 
 create table estimate_list(
@@ -60,6 +58,6 @@ create table review(
     member_id int(11) NOT NULL,
     description MEDIUMTEXT NOT NULL,
     score int(1) NOT NULL,
-    FOREIGN KEY (company_id) references company(id) on update cascade,
+    FOREIGN KEY (company_id) references company(member_id) on update cascade,
     FOREIGN KEY (member_id) references member(id) on update cascade
 );
