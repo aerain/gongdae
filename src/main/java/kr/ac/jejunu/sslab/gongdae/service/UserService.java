@@ -33,7 +33,7 @@ public class UserService {
         return 0L;
     }
 
-    private Member getCurrentUser() {
+    public Member getCurrentUser() {
         Object member = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if(member instanceof Member)
             return (Member) member;

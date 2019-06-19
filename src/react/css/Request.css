@@ -1,9 +1,5 @@
 input { border: 0; border-bottom: 0.5px solid #000000}
 
-.request-content {
-    margin-top: calc(2rem + 16px);
-}
-
 .request-content > .description-content {
     padding: 24px;
     display:flex;

@@ -12,6 +12,7 @@ export default class Main extends Component {
                     개웃기네
                 </div>
                 <Link to="/login">로그인하기</Link>
+                <Link to="/signup">회원가입</Link>
             </div>
         )
     }

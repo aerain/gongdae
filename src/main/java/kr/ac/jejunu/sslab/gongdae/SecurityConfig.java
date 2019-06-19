@@ -35,6 +35,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/swagger-ui.html",
                         "/webjars/**")
                 .permitAll()
+//                .antMatchers("/user/**").hasRole(MemberRoleEnum.user.getRole())
+//                .antMatchers("/company/**").hasRole(MemberRoleEnum.company.getRole())
                 .antMatchers("/**").authenticated()
                 .and()
             .formLogin()

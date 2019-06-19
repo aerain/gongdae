@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+
 import '../../../css/SignUp.css';
 import Header from "../Header";
 export default class SignUp extends Component {
@@ -78,6 +80,7 @@ export default class SignUp extends Component {
     }
 
     render() {
+        if(this.state.isSignup) return <Redirect to="/login" />
         return(
             <div className="signup-content">
                 <Header

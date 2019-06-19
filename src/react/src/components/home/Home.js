@@ -33,7 +33,7 @@ export default class Home extends Component {
 
     render() {
         return (
-            <div className="home-list">
+            <div className="content">
                 <Header 
                     icon="menu"
                     onClick={() => alert("hi")}

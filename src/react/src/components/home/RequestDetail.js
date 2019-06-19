@@ -56,7 +56,7 @@ export default class RequestDetail extends Component {
     render() {
         let { item } = this.state;
         return (
-            <div className="request-list-content">
+            <div className="content request-list-content">
                 <Header
                     icon="arrow_back_ios"
                     onClick={this.goBack}

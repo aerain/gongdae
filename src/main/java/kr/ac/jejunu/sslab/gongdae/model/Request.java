@@ -1,6 +1,7 @@
 package kr.ac.jejunu.sslab.gongdae.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
 import javax.persistence.*;
@@ -28,11 +29,15 @@ public class Request {
     @Column(name = "vr_image_url")
     private String imgUrl;
     @Transient
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Long companySize;
     @Transient
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<RequestDetail> requestDetailList;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "request_id")
-    @JsonIgnore
+//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    @JoinColumn(name = "request_id")
+//    @JsonIgnore
+    @Transient
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<ReverseAuction> reverseAuctionList;
 }

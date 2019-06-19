@@ -1,11 +1,13 @@
 package kr.ac.jejunu.sslab.gongdae.api;
 
+import kr.ac.jejunu.sslab.gongdae.model.Member;
 import kr.ac.jejunu.sslab.gongdae.model.Request;
 import kr.ac.jejunu.sslab.gongdae.model.RequestDetail;
 import kr.ac.jejunu.sslab.gongdae.model.ReverseAuction;
 import kr.ac.jejunu.sslab.gongdae.payload.ConfirmPayLoad;
 import kr.ac.jejunu.sslab.gongdae.service.RequestService;
 import kr.ac.jejunu.sslab.gongdae.service.ReverseAuctionService;
+import kr.ac.jejunu.sslab.gongdae.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +21,7 @@ import java.util.List;
 @RequestMapping("/api/request")
 @RequiredArgsConstructor
 public class RequestController {
+    private final UserService userService;
     private final RequestService requestService;
     private final ReverseAuctionService reverseAuctionService;
 
@@ -35,8 +38,13 @@ public class RequestController {
 
     @GetMapping
     public ResponseEntity<List<Request>> getRequestList() {
-        Long userId = 2L;
-        return ResponseEntity.ok(requestService.getRequestListByUserId(userId));
+        Member member = userService.getCurrentUser();
+        switch(member.getType()) {
+            case 0:     return ResponseEntity.ok(requestService.getRequestListByUserId(member.getId()));
+            case 1:     return ResponseEntity.ok(requestService.getRequestList());
+            default:    return ResponseEntity.ok().build();
+        }
+
     }
 
     @GetMapping("/{id}")

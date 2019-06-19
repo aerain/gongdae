@@ -112,7 +112,7 @@ export default class Request extends Component {
     )
     render() {
         return (this.state.isSaved) ? <Redirect to="/user" /> : (
-            <div className="request-content">
+            <div className="content request-content">
                 <Header 
                 icon="arrow_back_ios"
                 onClick={this.goBack}

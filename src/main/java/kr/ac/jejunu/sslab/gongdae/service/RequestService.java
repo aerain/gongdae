@@ -22,31 +22,28 @@ public class RequestService {
     private final RequestRepository requestRepository;
     private final RequestDetailRepository requestDetailRepository;
     private final ReverseAuctionRepository reverseAuctionRepository;
-    private final UserRepository userRepository;
+    private final UserService userService;
     private final CompanyRepository companyRepository;
 
     public Request getRequestById(Long id) {
-        Optional<Request> request = requestRepository.findById(id);
-        if(!request.isPresent()) return null;
-
-        Request presentRequest = request.get();
-        presentRequest.setRequestDetailList(requestDetailRepository.findAllByrequestId(id));
-        presentRequest.setReverseAuctionList(reverseAuctionRepository.findAllByrequestId(id));
-        presentRequest.setCompanySize((long) presentRequest.getReverseAuctionList().size());
-        return presentRequest;
+        return Optional.ofNullable(requestRepository.findById(id)).map(requestOptional -> {
+            Request presentRequest = requestOptional.get();
+            presentRequest.setRequestDetailList(requestDetailRepository.findAllByrequestId(id));
+            presentRequest.setReverseAuctionList(reverseAuctionRepository.findAllByrequestId(id));
+            presentRequest.setCompanySize((long) presentRequest.getReverseAuctionList().size());
+            return presentRequest;
+        }).orElse(null);
     }
 
     public void saveRequest(String title, String place, MultipartFile vrImgUrl, String requestList) throws IOException {
         List<RequestDetail> requestDetailList = new Gson().fromJson(requestList, new TypeToken<List<RequestDetail>>(){}.getType());
         String imagePath = fileUploadService.uploadFile(vrImgUrl);
 
-        // Todo 계정 연동
-        String name = "aerain";
         Request req = Request.builder()
                 .title(title)
                 .place(place)
                 .imgUrl(imagePath)
-                .member(userRepository.findByusername(name).get()).build();
+                .member(userService.getCurrentUser()).build();
 
         // cascade
         requestDetailList.parallelStream().forEach(requestDetail ->
@@ -83,5 +80,9 @@ public class RequestService {
         // cascade
         reverseAuction.getRequest().setSold(true);
         reverseAuctionRepository.save(reverseAuction);
+    }
+
+    public List<Request> getRequestList() {
+        return requestRepository.findAll();
     }
 }

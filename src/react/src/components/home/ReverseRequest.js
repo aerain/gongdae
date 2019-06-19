@@ -39,7 +39,7 @@ export default class ReverseRequest extends Component {
         if(this.state.dataSource === null) return (<div>안돼</div>);
         let {id, company, request, estimateList, price} = this.state.dataSource;
         return (
-            <div className="reverse-request">
+            <div className="content reverse-request">
                 <Header
                     icon="arrow_back_ios"
                     onClick={this.goBack}

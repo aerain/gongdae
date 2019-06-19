@@ -1,0 +1,30 @@
+.company-request > .request-list {
+    display: flex;
+    flex-direction: column;
+}
+.company-request > .request-list > .title {
+    font-size: 2rem;
+    font-weight: bold;
+}
+.company-request > .request-list > .request-img {
+    height: 300px;
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-position: 50% 50%;
+}
+.company-request > .request-list > .sub-request-title {
+    margin: 16px 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+.company-request > .request-list > .sub-request {
+    display: flex;
+    flex-direction: column;
+}
+.company-request > .request-list > .sub-request > div{
+    padding: 16px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px #d7d7d7;
+    border: 0.5px solid #e7e7e7;
+    margin: 16px 0;
+}
