@@ -11,7 +11,8 @@ CREATE table member(
 );
 
 create table company(
-    member_id int(11) PRIMARY KEY NOT NULL,
+    id int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    member_id int(11) NOT NULL,
     description MEDIUMTEXT NOT NULL,
     FOREIGN KEY (member_id) REFERENCES member(id) on update cascade
 );

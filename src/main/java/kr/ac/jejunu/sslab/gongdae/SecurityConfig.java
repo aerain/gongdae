@@ -26,8 +26,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-                // Main-UI
-                .antMatchers("/")
+                // Main-Page and SignUP and Check API USER
+                .antMatchers("/", "/signup", "/api/user")
                 .permitAll()
                 // Swagger-UI
                 .antMatchers("/v2/api-docs",

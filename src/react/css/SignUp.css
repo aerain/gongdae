@@ -29,7 +29,28 @@
 .signup-content > .signup-form > .type-row {
     display: flex;
     font-size: 1.2rem;
+    margin: 16px 0;
 }
 .signup-content > .signup-form > .type-row > label {
     flex: 1;
 }
+
+.signup-content > .signup-form > .company-description {
+    display: flex;
+    flex-direction: column;
+}
+.signup-content > .signup-form > .company-description > label {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.signup-content > .signup-form > .company-description > textarea {
+    font-size: 1.1rem;
+    min-height: 8rem;
+    background-color: #ffffff;
+    box-shadow: 0 0 16px #d7d7d7;
+    border-radius: 12px;
+    border: 0.5px solid #e7e7e7;
+    margin: 16px 0;
+    padding: 16px;
+}
+

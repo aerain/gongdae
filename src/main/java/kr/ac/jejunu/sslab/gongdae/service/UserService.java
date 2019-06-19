@@ -22,10 +22,9 @@ public class UserService {
     private final PasswordEncoder bCryptPasswordEncoder;
     private final UserRepository userRepository;
 
-    public void saveUser(Member member) {
+    public Member saveUser(Member member) {
         member.setPassword(bCryptPasswordEncoder.encode(member.getPassword()));
-        // Todo Role
-        userRepository.save(member);
+        return userRepository.save(member);
     }
 
     public Long getCurrentSessionId() {

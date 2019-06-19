@@ -6,5 +6,5 @@ import lombok.Data;
 @Data
 public class MemberPayLoad {
     private Member member;
-    private Integer memberType;
+    private String companyDescription;
 }

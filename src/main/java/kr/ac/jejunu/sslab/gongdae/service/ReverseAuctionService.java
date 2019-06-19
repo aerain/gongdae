@@ -24,7 +24,7 @@ public class ReverseAuctionService {
         ReverseAuction reverseAuction = reverseAuctionOptional.get();
         reverseAuction.setPrice(estimateRepository.sumByReverseAuctionId(id));
         reverseAuction.setEstimateList(estimateRepository.findAllByReverseAuctionId(id));
-        System.out.println(reverseAuction.getCompany().getCompanyName());
+        System.out.println(reverseAuction.getCompany().getMember().getUsername());
         return reverseAuction;
     }
 

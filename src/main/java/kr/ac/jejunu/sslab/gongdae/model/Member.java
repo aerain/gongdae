@@ -31,7 +31,6 @@ public class Member implements UserDetails {
     @Column(insertable = false, columnDefinition = "DEFAULT 1 NOT NULL")
     @JsonIgnore
     private Boolean enabled;
-    @JsonIgnore
     private Integer type;
     @Transient
     @JsonIgnore

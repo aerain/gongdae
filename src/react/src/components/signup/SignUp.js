@@ -12,13 +12,29 @@ export default class SignUp extends Component {
             username: "",
             type: 0,
             isSignup: false,
-            companyName: "",
-            company
+            companyDescription: "",
         }
     }
 
-    signUpToServer = () => {
-        console.log(this.state);
+    signUpToServer = async () => {
+        const { state, email, password, username, type, companyDescription } = this.state;
+        try {
+            let res = await fetch('/api/user', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Charset': 'UTF-8'
+                },
+                body: (this.state.type === 1)
+                    ? (JSON.stringify({member: {email, password, username, type}, companyDescription}))
+                    : (JSON.stringify({member: {email, password, username, type}}))
+            });
+            if(res.ok) this.setState({isSignup: true})
+        } catch(err) {
+            console.error(err);
+        }
+
+
     }
 
     _renderTypeRadio = (value, text) => (
@@ -36,11 +52,11 @@ export default class SignUp extends Component {
             <input type="password" id="password" placeholder="비밀번호를 입력하세요." onChange={this.changePassword}/>
             <label htmlFor="username">이름</label>
             <input type="text" id="username" placeholder="이름을 입력하세요." onChange={this.changeUsername}/>
+            {this._renderCompanyDetail()}
             <div className="type-row">
                 {this._renderTypeRadio(0, "일반 사용자")}
                 {this._renderTypeRadio(1, "회사")}
             </div>
-            {this._renderCompanyDetail()}
             <button className="signup-submit" onClick={this.signUpToServer}>오 님들 어서오셈</button>
         </div>
     )
@@ -48,11 +64,17 @@ export default class SignUp extends Component {
     _renderCompanyDetail = () => {
         if(this.state.type === 1) {
             return (
-                <div>
-                    hi
+                <div className="company-description">
+                    <label htmlFor="description-content">회사 소개</label>
+                    <textarea id="description-content" placeholder="회사를 소개해 주세요." onChange={this.changeCompanyDescription} />
                 </div>
             )
         } else return null;
+    }
+
+    changeCompanyDescription = e => {
+        let companyDescription = e.target.value;
+        this.setState({companyDescription})
     }
 
     render() {
@@ -82,8 +104,7 @@ export default class SignUp extends Component {
         this.setState({username});
     }
     changeType = e => {
-        let type = e.target.value;
-        console.log(type);
+        let type = parseInt(e.target.value);
         this.setState({type});
     }
 }
