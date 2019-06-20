@@ -19,7 +19,7 @@ export default class SignUp extends Component {
     }
 
     signUpToServer = async () => {
-        const { state, email, password, username, type, companyDescription } = this.state;
+        const { email, password, username, type, companyDescription } = this.state;
         try {
             let res = await fetch('/api/user', {
                 method: 'POST',

@@ -1,38 +1,19 @@
 import React, { Component } from 'react';
 import Header from "../Header";
 import '../../../css/CompanyReverseRequest.css'
-import {Link} from "react-router-dom";
 
 export default class CompanyReverseRequest extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            item: {
-                title: '제목',
-                imgUrl: '//localhost:8080/images/47378736_1881896865241147_2732212856593317888_n.jpg',
-                companySize: 3,
-                place: '꽃집',
-                requestDetailList: [
-                    {
-                        "description": "ㅎㅇㅇ",
-                        "id": 1,
-                    },
-                    {
-                        "description": "ㅎㅇㅇ2",
-                        "id": 2,
-                    },
-                    {
-                        "description": "ㅎㅇㅇ3",
-                        "id": 3
-                    },
-                ]
-            },
-            estimateList: []
+            item: undefined,
+            estimateList: [],
+            isRequested: false,
         }
 
     }
     componentDidMount = async () => {
-        // this.getItem();
+        this.getItem();
     }
 
     getItem = async () => {
@@ -69,9 +50,32 @@ export default class CompanyReverseRequest extends Component {
 
     _renderReverseButton = () => (
         <div className="request-header-right-element">
-            <button onClick={() => alert("hi")}>경매 시작</button>
+            <button onClick={this.requestReverse}>경매 시작</button>
         </div>
     )
+    requestReverse = async () => {
+        const { estimateList } = this.state;
+        if(estimateList.isEmpty()) return;
+
+        try {
+            const { id } = this.props.match.params.id;
+            let res = await fetch('/api/reverse', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Charset': 'UTF-8'
+                },
+                body: JSON.stringify({
+                    requestId: id,
+                    estimateList
+                })
+            });
+            if(res.ok)
+                this.setState({isRequested: true});
+        } catch(err) {
+            console.error(err);
+        }
+    }
     render() {
         return (
             <div className="content company-reverse-request">
@@ -80,7 +84,7 @@ export default class CompanyReverseRequest extends Component {
                     onClick={this.goBack}
                     rightElement={this._renderReverseButton}
                 />
-                {this._renderRequestInfo(this.state.item)}
+                {this.state.item && this._renderRequestInfo(this.state.item)}
                 <div className="reverse-content">
                     <div className="reverse-content-header">
                         <span className="title">견적서</span>
@@ -89,7 +93,7 @@ export default class CompanyReverseRequest extends Component {
                             onClick={this.addReverseList}
                         >add</button>
                     </div>
-                    {this.state.estimateList.map(this._renderReverseEstimateItem)}
+                    {this.state.estimateList && this.state.estimateList.map(this._renderReverseEstimateItem)}
                 </div>
             </div>
 
@@ -116,6 +120,7 @@ export default class CompanyReverseRequest extends Component {
             <input type="text" id="product-uri" onChange={e => this.changeProductUri(e.currentTarget.value, index)}/>
         </div>
     )
+
     changeProductName = (name, index) => this.setState(({estimateList}) => {
         estimateList[index].name = name;
         return {estimateList}
@@ -129,5 +134,4 @@ export default class CompanyReverseRequest extends Component {
         return {estimateList}
     })
     goBack = () => this.props.history.goBack();
-
 }

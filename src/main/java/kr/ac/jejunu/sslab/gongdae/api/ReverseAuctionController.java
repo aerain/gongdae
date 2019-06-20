@@ -1,14 +1,14 @@
 package kr.ac.jejunu.sslab.gongdae.api;
 
 import kr.ac.jejunu.sslab.gongdae.model.ReverseAuction;
+import kr.ac.jejunu.sslab.gongdae.payload.RequestReversePayLoad;
 import kr.ac.jejunu.sslab.gongdae.service.ReverseAuctionService;
 import kr.ac.jejunu.sslab.gongdae.vo.ReverseAuctionVO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -19,7 +19,21 @@ public class ReverseAuctionController {
     private final ReverseAuctionService reverseAuctionService;
 
     @GetMapping("/{id}")
-    public ReverseAuction getReverseAuctionById(@PathVariable Long id) {
-        return reverseAuctionService.getReverseAuctionbyId(id);
+    public ResponseEntity<ReverseAuction> getReverseAuctionById(@PathVariable Long id) {
+        try {
+            return ResponseEntity.ok(reverseAuctionService.getReverseAuctionbyId(id));
+        } catch (IllegalAccessException e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity requestReverse(@RequestBody RequestReversePayLoad requestReversePayLoad) {
+        try {
+            reverseAuctionService.saveReverse(requestReversePayLoad.getRequestId(), requestReversePayLoad.getEstimateList());
+        } catch (IllegalAccessException e) {
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok().build();
     }
 }
