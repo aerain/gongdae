@@ -6,6 +6,7 @@ import { Login } from './components/login';
 import Main from "./components/Main";
 import { SignUp } from "./components/signup";
 import {CompanyForSale, CompanyRequest, CompanyReverseRequest, CompanyReverseList, CompanyReverseDetail, CompanyDoneRequest } from "./components/company";
+import {CompanyIntroduction} from "./components/introduction";
 
 export default class App extends React.Component {
     render() {
@@ -26,6 +27,7 @@ export default class App extends React.Component {
                         <Route path="/company/request/:id" component={CompanyReverseRequest}/>
                         <Route exact path="/company/reverse" component={CompanyReverseList}/>
                             <Route path="/company/reverse/:id" component={CompanyReverseDetail}/>
+                    <Route exact path="/detail/company/:id" component={CompanyIntroduction} />
                 </Switch>
             </BrowserRouter>
         );

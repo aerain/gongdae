@@ -54,5 +54,72 @@
 }
 
 .reverse-request .company-introduction {
+    margin: 16px 0;
+    padding: 16px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px #d7d7d7;
+    border: 0.5px solid #e7e7e7;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+}
+.reverse-request .company-introduction > .company-score {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 16px;
+}
+.reverse-request .company-introduction > .company-more {
+    font-size: 1rem;
+}
 
+.reverse-request > .reverse-review {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 5;
+    background-color: #ffffff;
+    border-radius: 4px;
+    border: 0.5px solid #e7e7e7;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+}
+.reverse-request > .reverse-review > .review-header {
+    display: flex;
+    justify-content: flex-end;
+}
+.reverse-request > .reverse-review > .review-header > .review-exit {
+    outline: 0;
+    border: 0;
+    background-color: transparent;
+
+}
+.reverse-request > .reverse-review > .review-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.reverse-request > .reverse-review > .review-area {
+    height: 5rem;
+    padding: 16px;
+    margin: 16px 0;
+    font-size: 1rem;
+    border: 0.5px solid #e7e7e7;
+}
+.reverse-request > .reverse-review > .review-score-content {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2rem;
+}
+.reverse-request > .reverse-review > .review-submit {
+    outline: 0;
+    border: 0;
+    background-color: #e7e7e7;
+    box-shadow: 0 2px 8px #d7d7d7;
+    margin: 16px 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 16px;
 }

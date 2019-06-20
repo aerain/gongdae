@@ -33,4 +33,8 @@ public class Company implements Serializable {
     @Transient
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Integer score;
+
+    @Transient
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Integer chosenCount;
 }

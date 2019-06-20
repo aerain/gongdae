@@ -1,6 +1,7 @@
 package kr.ac.jejunu.sslab.gongdae.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -23,7 +24,7 @@ public class CompanyReview implements Serializable {
     private Company company;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="member_id")
-    @JsonIgnore
+    @JsonIgnoreProperties({"id", "email", "password", "type"})
     private Member member;
     private String description;
     private Integer score;

@@ -1,9 +1,6 @@
 package kr.ac.jejunu.sslab.gongdae.service;
 
-import kr.ac.jejunu.sslab.gongdae.repository.CompanyRepository;
-import kr.ac.jejunu.sslab.gongdae.repository.EstimateRepository;
-import kr.ac.jejunu.sslab.gongdae.repository.RequestRepository;
-import kr.ac.jejunu.sslab.gongdae.repository.ReverseAuctionRepository;
+import kr.ac.jejunu.sslab.gongdae.repository.*;
 import kr.ac.jejunu.sslab.gongdae.model.Estimate;
 import kr.ac.jejunu.sslab.gongdae.model.ReverseAuction;
 import kr.ac.jejunu.sslab.gongdae.vo.ReverseAuctionVO;
@@ -20,13 +17,15 @@ public class ReverseAuctionService {
     private final EstimateRepository estimateRepository;
     private final CompanyRepository companyRepository;
     private final RequestRepository requestRepository;
+    private final ReviewRepository reviewRepository;
     private final UserService userService;
 
     public ReverseAuction getReverseAuctionbyId(Long id) throws IllegalAccessException {
-        return Optional.ofNullable(reverseAuctionRepository.findById(id)).map(reverseAuctionOptional -> {
-            ReverseAuction reverseAuction = reverseAuctionOptional.get();
+        return Optional.of(reverseAuctionRepository.findById(id).get()).map(reverseAuction -> {
             reverseAuction.setPrice(estimateRepository.sumByReverseAuctionId(id));
             reverseAuction.setEstimateList(estimateRepository.findAllByReverseAuctionId(id));
+            reverseAuction.getCompany()
+                    .setScore(Optional.of(reviewRepository.findAvgByCompanyId(reverseAuction.getCompany().getId()).get()).orElse(0));
             return reverseAuction;
         }).orElseThrow(IllegalAccessException::new);
     }

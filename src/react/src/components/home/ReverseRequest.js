@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Redirect} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import Header from "../Header";
 import '../../../css/ReverseRequest.css';
 
@@ -10,7 +10,11 @@ export default class ReverseRequest extends Component {
 
         this.state = {
             dataSource: null,
-            isConfirm: false
+            isConfirm: false,
+            isReview: false,
+            review: "",
+            reviewScore: 5,
+            wroteReview: false,
         }
     }
     componentDidMount = async () => {
@@ -39,8 +43,8 @@ export default class ReverseRequest extends Component {
     )
 
     render() {
-        if(this.state.isConfirm) return <Redirect to="/user" />;
-        if(this.state.dataSource === null) return (<div>안돼</div>);
+        if(this.state.isConfirm || this.state.wroteReview) return <Redirect to="/user" />;
+        if(!this.state.dataSource) return (<div>안돼</div>);
         let {id, company, request, estimateList, price, chosen} = this.state.dataSource;
         return (
             <div className="content reverse-request">
@@ -49,9 +53,9 @@ export default class ReverseRequest extends Component {
                     onClick={this.goBack}
                 />
                 <span className="title">
-                        <span className="company-name">{company.companyName}</span>
+                        <span className="company-name">{company.member.username}</span>
                         견적
-                    </span>
+                </span>
                 <div className="vr-image" style={{backgroundImage: `url(${request.imgUrl}`}}/>
                 <span className="estimated-title">견적서</span>
                 {
@@ -59,13 +63,56 @@ export default class ReverseRequest extends Component {
                 }
                 <span className="total-price">도합 {price}원</span>
                 {this._renderCompanyIntroduction(company)}
-                {!chosen && this._renderSubmitButton(request.id, id)}
+                {chosen ? this._renderReviewButton(request.id, id): this._renderSubmitButton(request.id, id)}
+                {this.state.isReview && this._renderReview()}
             </div>
         )
     }
+    _renderReview = () => (
+        <div className="reverse-review">
+            <div className="review-header">
+                <button className="material-icons review-exit" onClick={this.toggleReview}>close</button>
+            </div>
+            <span className="review-title">리뷰를 입력해주세요</span>
+            <textarea className="review-area" onChange={this.changeReview} placeholder="여기에 입력하세요."/>
+            <div className="review-score-content">
+                <span>당신의 점수는?</span>
+                <select className="review-score" onChange={this.changeReviewScore}value={this.state.reviewScore}>
+                    <option value="1">1점</option>
+                    <option value="2">2점</option>
+                    <option value="3">3점</option>
+                    <option value="4">4점</option>
+                    <option value="5">5점</option>
+                </select>
+            </div>
+            <button className="review-submit" onClick={this.submitReview}>리뷰 작성하기</button>
+        </div>
+    )
+    changeReview = e => this.setState({review: e.target.value});
+    changeReviewScore = e => this.setState({reviewScore: parseInt(e.target.value)});
+    submitReview = async () => {
+        const companyId = this.state.dataSource.company.id,
+            description = this.state.review,
+            score = this.state.reviewScore;
+        let res = await (await fetch(`/api/company/${companyId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Charset': 'UTF-8'
+            },
+            body: JSON.stringify({ description, score })
+        }));
+        if(res.ok) this.setState({wroteReview: true})
+    }
+
+    _renderReviewButton = (requestId, id) => (
+        <button className="reverse-submit" onClick={e => this.toggleReview(requestId, id)}>
+            리뷰 작성하기</button>)
+    toggleReview = () => this.setState(state => ({isReview: !state.isReview}))
     _renderCompanyIntroduction = company => (
         <div className="company-introduction">
-            <span className="company-score">회사 평점 </span>
+            <span className="company-score">회사 평점 {company.score}/5</span>
+            <Link to={`/detail/company/${company.id}`} className="company-more">{company.member.username} 회사 설명 더보기</Link>
         </div>
     )
 

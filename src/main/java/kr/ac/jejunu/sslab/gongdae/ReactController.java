@@ -16,7 +16,7 @@ public class ReactController {
 
     private final UserService userService;
 
-    @GetMapping(value={"/user/**", "/login", "/company/**", "/signup"})
+    @GetMapping(value={"/user/**", "/login", "/company/**", "/signup", "/detail/**"})
     public String react() {
         return "index";
     }

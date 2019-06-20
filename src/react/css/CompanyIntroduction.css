@@ -1,0 +1,52 @@
+.company-detail > .company-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.company-detail > .company-description {
+    background-color: #ffffff;
+    box-shadow: 0 2px 8px #d7d7d7;
+    border: 0.5px solid #e7e7e7;
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    padding: 16px;
+}
+
+.company-detail > .company-description > .company-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+.company-detail > .company-score {
+    font-size: 1.2rem;
+    margin: 16px 0;
+}
+.company-detail > .company-chosen-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.2rem;
+    margin: 16px 0;
+}
+
+.company-detail > .review-list > .review-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.company-detail > .review-list > .review-item {
+    background-color: #ffffff;
+    border: 0.5px solid #e7e7e7;
+    box-shadow: 0 2px 8px #d7d7d7;
+    border-radius: 4px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    margin: 16px 0;
+}
+
+.company-detail > .review-list > .review-item > .review-description {
+    flex: 1;
+}
