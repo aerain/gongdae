@@ -39,9 +39,10 @@ public class ReverseAuctionService {
     }
 
     public void saveReverse(Long requestId, List<Estimate> estimateList) throws IllegalAccessException {
-        ReverseAuction reverseAuction = reverseAuctionRepository
-                .save(ReverseAuction.builder()
-                        .company(companyRepository.findBymemberId(userService.getCurrentSessionId()).orElseThrow(IllegalAccessException::new))
+        ReverseAuction reverseAuction = reverseAuctionRepository.save(
+                ReverseAuction.builder()
+//                        .id(userService.getCurrentSessionId())
+                        .company(companyRepository.findById(userService.getCurrentSessionId()).orElseThrow(IllegalAccessException::new))
                         .request(requestRepository.findById(requestId).orElseThrow(IllegalAccessException::new))
                         .build());
         estimateList.parallelStream().forEach(estimate -> estimate.setReverseAuction(reverseAuction));

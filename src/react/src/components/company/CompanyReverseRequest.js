@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Header from "../Header";
 import '../../../css/CompanyReverseRequest.css'
+import {Redirect} from "react-router-dom";
 
 export default class CompanyReverseRequest extends Component {
     constructor(props) {
@@ -55,10 +56,10 @@ export default class CompanyReverseRequest extends Component {
     )
     requestReverse = async () => {
         const { estimateList } = this.state;
-        if(estimateList.isEmpty()) return;
+        if(!(Array.isArray(estimateList) && estimateList.length)) return;
 
         try {
-            const { id } = this.props.match.params.id;
+            const { id } = this.props.match.params;
             let res = await fetch('/api/reverse', {
                 method: 'POST',
                 headers: {
@@ -77,6 +78,7 @@ export default class CompanyReverseRequest extends Component {
         }
     }
     render() {
+        if(this.state.isRequested) return <Redirect to="/company" />
         return (
             <div className="content company-reverse-request">
                 <Header
