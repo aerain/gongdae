@@ -35,9 +35,9 @@ export default class ReverseRequest extends Component {
     )
 
     render() {
-        if(this.state.isConfirm) return <Redirect to="/" />;
+        if(this.state.isConfirm) return <Redirect to="/user" />;
         if(this.state.dataSource === null) return (<div>안돼</div>);
-        let {id, company, request, estimateList, price} = this.state.dataSource;
+        let {id, company, request, estimateList, price, chosen} = this.state.dataSource;
         return (
             <div className="content reverse-request">
                 <Header
@@ -54,10 +54,12 @@ export default class ReverseRequest extends Component {
                     estimateList.map(this._renderEstimatedList)
                 }
                 <span className="total-price">도합 {price}원</span>
-                <button className="reverse-submit" onClick={e => this.submit(request.id, id)}>견적선택하기</button>
+                {!chosen && this._renderSubmitButton(request.id, id)}
             </div>
         )
     }
+
+    _renderSubmitButton = (requestId, id) => (<button className="reverse-submit" onClick={e => this.submit(requestId, id)}>견적선택하기</button>)
 
     submit = async (requestId, reverseAuctionId) => {
         const uri = `/api/request/confirm`;
@@ -70,8 +72,8 @@ export default class ReverseRequest extends Component {
                 },
                 body: JSON.stringify({ requestId, reverseAuctionId })
             });
-
-            this.setState(state => ({isConfirm: !state.isConfirm}))
+            if(response.ok)
+                this.setState(state => ({isConfirm: !state.isConfirm}))
         } catch (err) {
             console.error(err);
         }

@@ -1,11 +1,11 @@
 import React from 'react';
 import '../css/App.css';
 import { BrowserRouter, Switch, Route} from 'react-router-dom'
-import {Request, RequestDetail, ReverseRequest, Home} from './components/home'
+import {Request, RequestDetail, ReverseRequest, Home, DoneRequest} from './components/home'
 import { Login } from './components/login';
 import Main from "./components/Main";
 import { SignUp } from "./components/signup";
-import {CompanyForSale, CompanyRequest, CompanyReverseRequest, CompanyReverseList, CompanyReverseDetail } from "./components/company";
+import {CompanyForSale, CompanyRequest, CompanyReverseRequest, CompanyReverseList, CompanyReverseDetail, CompanyDoneRequest } from "./components/company";
 
 function App() {
   return (
@@ -15,10 +15,12 @@ function App() {
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/signup" component={SignUp} />
                 <Route exact path="/user" component={Home} />
+                    <Route path="/user/done" component={DoneRequest} />
                     <Route path="/user/request" component={Request} />
                     <Route path="/user/list/:id" component={RequestDetail} />
                     <Route path="/user/reverse/:id" component={ReverseRequest} />
                 <Route exact path="/company" component={CompanyForSale} />
+                    <Route path="/company/done" component={CompanyDoneRequest} />
                     <Route path="/company/list/:id" component={CompanyRequest} />
                     <Route path="/company/request/:id" component={CompanyReverseRequest} />
                     <Route exact path="/company/reverse" component={CompanyReverseList}/>

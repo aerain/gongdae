@@ -5,15 +5,16 @@ export default class Main extends Component {
     render() {
         return(
             <div className="main-content">
-                <div>
-                    왜 안돼
+                <div className="title">
+                    <p className="title-row"><span className="title-accent">공</span>사</p>
+                    <p className="title-row"><span className="title-accent">대</span>신 해드립니다.</p>
                 </div>
-                <div>
-                    개웃기네
+                <div className="btn-container">
+                    <Link to="/login" className="btn">로그인하기</Link>
+                    <Link to="/signup" className="btn">회원가입</Link>
                 </div>
-                <Link to="/login">로그인하기</Link>
-                <Link to="/signup">회원가입</Link>
             </div>
         )
     }
+    _onLoading = () => (<div>로딩좀합시다</div>)
 }

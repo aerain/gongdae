@@ -26,9 +26,11 @@ export default class CompanyRequest extends Component {
     }
     _renderReverseButton = () => (
         <div className="request-header-right-element">
-            <Link to={`/company/request/${this.props.match.params.id}`}>경매 제시</Link>
+            {this.state.item && !this.state.item.sold && this._renderRequestLink()}
         </div>
     )
+
+    _renderRequestLink = () => (<Link to={`/company/request/${this.props.match.params.id}`}>경매 제시</Link>)
 
     _renderItem = () => {
         let { item } = this.state;

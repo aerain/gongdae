@@ -38,13 +38,24 @@ public class RequestController {
 
     @GetMapping
     public ResponseEntity<List<Request>> getRequestList() {
-        Member member = userService.getCurrentUser();
-        switch(member.getType()) {
-            case 0:     return ResponseEntity.ok(requestService.getRequestListByUserId(member.getId()));
-            case 1:     return ResponseEntity.ok(requestService.getRequestList());
-            default:    return ResponseEntity.ok().build();
-        }
+        return getListResponseEntity(false);
+    }
 
+    private ResponseEntity<List<Request>> getListResponseEntity(boolean sold) {
+        Member member = userService.getCurrentUser();
+        switch (member.getType()) {
+            case 0:
+                return ResponseEntity.ok(requestService.getRequestListByUserId(member.getId(), sold));
+            case 1:
+                return ResponseEntity.ok(requestService.getRequestList(sold));
+            default:
+                return ResponseEntity.ok().build();
+        }
+    }
+
+    @GetMapping("/done")
+    public ResponseEntity<List<Request>> getRequestDoneList() {
+        return getListResponseEntity(true);
     }
 
     @GetMapping("/{id}")

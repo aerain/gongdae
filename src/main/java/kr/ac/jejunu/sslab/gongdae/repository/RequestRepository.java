@@ -13,6 +13,9 @@ public interface RequestRepository extends JpaRepository<Request, Long> {
 //    @Query(value = "SELECT * FROM request r WHERE r.user_id = :user_id", nativeQuery = true)
     List<Request> findAllBymemberId(@Param("member_id") Long memberId);
 
-    @Query(value = "SELECT r FROM Request r WHERE r.member.id = :user_id and r.sold = false")
-    List<Request> findAllOnProgressByuserId(@Param("user_id") Long clientId);
+    @Query(value = "SELECT r FROM Request r WHERE r.member.id = :user_id and r.sold = :sold")
+    List<Request> findAllOnProgressByuserId(@Param("user_id") Long clientId, @Param("sold") boolean sold);
+
+    @Query(value = "SELECT r from Request r WHERE r.sold = :sold")
+    List<Request> findAllOnProgress(@Param("sold") boolean sold);
 }

@@ -54,8 +54,8 @@ public class RequestService {
         requestDetailRepository.saveAll(requestDetailList);
     }
 
-    public List<Request> getRequestListByUserId(Long clientId) {
-        List<Request> requestList = requestRepository.findAllOnProgressByuserId(clientId);
+    public List<Request> getRequestListByUserId(Long clientId, boolean sold) {
+        List<Request> requestList = requestRepository.findAllOnProgressByuserId(clientId, sold);
         requestList.parallelStream().forEach(request ->
                 request.setCompanySize(reverseAuctionRepository.countByrequestId(request.getId())));
         return requestList;
@@ -66,7 +66,6 @@ public class RequestService {
     }
 
     public void confirmRequest(ConfirmPayLoad confirmPayLoad) {
-        System.out.println(confirmPayLoad.getReverseAuctionId());
         Optional<ReverseAuction> reverseAuctionOptional = reverseAuctionRepository.findById(confirmPayLoad.getReverseAuctionId());
         if(reverseAuctionOptional.isEmpty()) return;
 
@@ -81,7 +80,7 @@ public class RequestService {
         reverseAuctionRepository.save(reverseAuction);
     }
 
-    public List<Request> getRequestList() {
-        return requestRepository.findAll();
+    public List<Request> getRequestList(boolean sold) {
+        return requestRepository.findAllOnProgress(sold);
     }
 }

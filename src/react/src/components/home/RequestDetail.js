@@ -59,15 +59,28 @@ export default class RequestDetail extends Component {
                     </div>
                 </button>
                 {this.state.toggleSubList && this._renderSubList()}
-                <div className="join-company">
-                    <div className="company-header">
-                        <p>해당 의뢰에</p>
-                        <p>{item.companySize} 개의 회사가 참여해요!</p>
+                {(item.sold) ? (
+                    <div className="join-company">
+                        <div className="company-header">
+                            <p>현재 다음 회사의</p>
+                            <p>경매 견적을 받았어요!</p>
+                        </div>
+                        {
+                            this.state.companyList.filter(item => item.chosen).map(this._renderCompanyItem)
+                        }
                     </div>
-                    {
-                        this.state.companyList.map(this._renderCompanyItem)
-                    }
-                </div>
+                ) : (
+                    <div className="join-company">
+                        <div className="company-header">
+                            <p>해당 의뢰에</p>
+                            <p>{item.companySize} 개의 회사가 참여해요!</p>
+                        </div>
+                        {
+                            this.state.companyList.map(this._renderCompanyItem)
+                        }
+                    </div>
+                )}
+
 
             </div>
         );
@@ -78,9 +91,9 @@ export default class RequestDetail extends Component {
         let { company, price, id } = item;
         return (
             <div className="company-item">
-                <div className="company-name">{company.companyName}</div>
+                <div className="company-name">{company.member.username}</div>
                 <div className="estimated-price">{price}</div>
-                <Link to={`${match.url}/reverse/${id}`} className="estimated-detail">상세보기</Link>
+                <Link to={`/user/reverse/${id}`} className="estimated-detail">상세보기</Link>
             </div>
         )
     }
