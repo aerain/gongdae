@@ -19,9 +19,13 @@ export default class ReverseRequest extends Component {
 
     getDataSource = async () => {
         let {id} = this.props.match.params;
-        const url = `/api/reverse/${id}`;
-        let dataSource = await (await fetch(url)).json();
-        this.setState({dataSource});
+        try {
+            const url = `/api/reverse/${id}`;
+            let dataSource = await (await fetch(url)).json();
+            this.setState({dataSource});
+        } catch (e) {
+            console.error(e);
+        }
     }
 
     goBack = () => this.props.history.goBack();
@@ -54,10 +58,17 @@ export default class ReverseRequest extends Component {
                     estimateList.map(this._renderEstimatedList)
                 }
                 <span className="total-price">도합 {price}원</span>
+                {this._renderCompanyIntroduction(company)}
                 {!chosen && this._renderSubmitButton(request.id, id)}
             </div>
         )
     }
+    _renderCompanyIntroduction = company => (
+        <div className="company-introduction">
+            <span className="company-score">회사 평점 </span>
+        </div>
+    )
+
 
     _renderSubmitButton = (requestId, id) => (<button className="reverse-submit" onClick={e => this.submit(requestId, id)}>견적선택하기</button>)
 

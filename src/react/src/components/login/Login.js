@@ -2,6 +2,12 @@ import React, { Component } from 'react';
 import '../../../css/Login.css'
 import Header from "../Header";
 export default class Login extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isLogined: false,
+        }
+    }
     goBack = () => this.props.history.goBack();
     render() {
         return (

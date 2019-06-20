@@ -12,16 +12,17 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Builder
 @Entity
+@Table(name = "review")
 public class CompanyReview implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="company_id")
     @JsonIgnore
     private Company company;
-    @ManyToOne
-    @JoinColumn(name="client_id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="member_id")
     @JsonIgnore
     private Member member;
     private String description;

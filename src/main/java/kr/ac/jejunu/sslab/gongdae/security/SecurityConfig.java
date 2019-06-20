@@ -1,4 +1,4 @@
-package kr.ac.jejunu.sslab.gongdae;
+package kr.ac.jejunu.sslab.gongdae.security;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

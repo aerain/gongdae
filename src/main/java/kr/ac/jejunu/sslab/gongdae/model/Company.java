@@ -1,6 +1,7 @@
 package kr.ac.jejunu.sslab.gongdae.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
 import javax.persistence.*;
@@ -26,5 +27,10 @@ public class Company implements Serializable {
     private String description;
 
     @Transient
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<CompanyReview> companyReview;
+
+    @Transient
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Integer score;
 }

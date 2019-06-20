@@ -1,8 +1,7 @@
 package kr.ac.jejunu.sslab.gongdae.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import kr.ac.jejunu.sslab.gongdae.MemberRoleEnum;
+import kr.ac.jejunu.sslab.gongdae.security.MemberRoleEnum;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

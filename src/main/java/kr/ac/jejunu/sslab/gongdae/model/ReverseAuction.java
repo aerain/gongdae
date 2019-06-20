@@ -26,7 +26,6 @@ public class ReverseAuction {
     private Request request;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "company_id")
-    @JsonIgnoreProperties(value = {"email", "password", "description"})
     private Company company;
     @Transient
     private List<Estimate> estimateList;

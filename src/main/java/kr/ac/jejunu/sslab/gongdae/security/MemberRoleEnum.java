@@ -1,4 +1,4 @@
-package kr.ac.jejunu.sslab.gongdae;
+package kr.ac.jejunu.sslab.gongdae.security;
 
 public enum MemberRoleEnum {
     user("USER"),
