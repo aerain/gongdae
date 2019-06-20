@@ -1,0 +1,89 @@
+.company-reverse-request > .request-detail > .request-info {
+    display: flex;
+    flex-direction: row;
+    margin: 16px;
+}
+
+.company-reverse-request > .request-detail > .request-info > .request-img {
+    flex: 0 0 300px;
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-position: 50% 50%;
+}
+
+.company-reverse-request > .request-detail > .request-info > .request-con {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin: 0 16px;
+    padding: 16px 0;
+}
+.company-reverse-request > .request-detail > .request-info > .request-con > .title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 16px;
+}
+
+.company-reverse-request > .request-detail > .request-info > .request-con > .place {
+    font-size: 1rem;
+}
+.company-reverse-request > .request-detail > .request-info > .request-con > .company-size {
+    font-size: 0.8rem;
+}
+
+.company-reverse-request .request-detail-list {
+    border-top: 1px solid #d7d7d7;
+    border-bottom: 1px solid #d7d7d7;
+    margin: 16px 0;
+}
+.company-reverse-request > .request-detail > .request-detail-list >.title {
+    font-size: 1.2rem;
+    padding: 8px 0;
+    border-bottom: 1px solid #d7d7d7;
+}
+
+.company-reverse-request .request-detail-list > .detail-row  {
+    padding: 8px 0;
+    border-bottom: 0.5px solid #e7e7e7;
+}
+.company-reverse-request .reverse-content > .reverse-content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 16px 0;
+    padding: 4px 16px;
+}
+.company-reverse-request .reverse-content > .reverse-content-header > .title {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.company-reverse-request .reverse-content > .reverse-content-header >.add-list {
+    outline: 0;
+    background-color: #d7d7d7;
+}
+.company-reverse-request .estimate-row {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 12px;
+    background-color: #ffffff;
+    -webkit-box-shadow: 0 2px 16px #d7d7d7;
+    -moz-box-shadow: 0 2px 16px #d7d7d7;
+    box-shadow: 0 2px 16px #d7d7d7;
+    border: 0.5px solid #e7e7e7;
+    padding: 16px;
+    margin: 8px 0;
+}
+.company-reverse-request .estimate-row > label {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.company-reverse-request .estimate-row > input {
+    font-size: 1rem;
+    padding: 8px 0;
+    border-bottom: 1px solid #e7e7e7;
+    margin-bottom: 16px;
+}
+

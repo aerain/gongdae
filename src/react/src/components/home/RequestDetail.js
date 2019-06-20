@@ -7,7 +7,6 @@ export default class RequestDetail extends Component {
         super(props);
         this.state = {
             item: {},
-            requestList: [],
             companyList: [],
             toggleSubList: false,
         }
@@ -15,7 +14,6 @@ export default class RequestDetail extends Component {
 
     componentDidMount = async () => {
         this.getDataSource();
-        this.getRequestList();
         this.getCompanyList();
     }
 
@@ -41,16 +39,7 @@ export default class RequestDetail extends Component {
             console.error(err);
         }
     }
-    getRequestList = async () => {
-        const {id} = this.props.match.params;
-        const uri = `/api/request/${id}/detail`;
-        try {
-            const requestList = await (await fetch(uri)).json();
-            this.setState({requestList})
-        } catch (err) {
-            console.error(err);
-        }
-    }
+
     goBack = () => this.props.history.goBack();
 
     render() {
@@ -96,13 +85,13 @@ export default class RequestDetail extends Component {
         )
     }
 
-    _renderSubList = () => (this.state.requestList.length === 0) ?
+    _renderSubList = () => (this.state.item.requestDetailList.length === 0) ?
         (
             <div className="sub-list-content">없어요</div>
         ) : (
             <div className="sub-list-content">
                 {
-                    this.state.requestList.map(item => (
+                    this.state.item.requestDetailList.map(item => (
                         <div className="sub-list-item">{item.description}</div>
                     ))
                 }

@@ -29,8 +29,7 @@ public class RequestService {
         return Optional.ofNullable(requestRepository.findById(id)).map(requestOptional -> {
             Request presentRequest = requestOptional.get();
             presentRequest.setRequestDetailList(requestDetailRepository.findAllByrequestId(id));
-            presentRequest.setReverseAuctionList(reverseAuctionRepository.findAllByrequestId(id));
-            presentRequest.setCompanySize((long) presentRequest.getReverseAuctionList().size());
+            presentRequest.setCompanySize(reverseAuctionRepository.countByrequestId(id));
             return presentRequest;
         }).orElse(null);
     }

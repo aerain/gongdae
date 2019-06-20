@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Header from "../Header";
 import '../../../css/CompanyRequest.css';
 
@@ -13,27 +14,19 @@ export default class CompanyRequest extends Component {
         this.getData();
     }
 
-    requestReverseToServer = async () => {
-
-    }
     getData = async () => {
-
-        this.setState({item: {
-                id  : 1,
-                imgUrl: "//117.17.102.226:8080/images/47378736_1881896865241147_2732212856593317888_n.jpg",
-                title: '안녕하세욘',
-                place: '반가워욘',
-                requestDetailList: [{
-                    description: "잘있어욘",
-                    id:1
-                }],
-                companySize: 0
-
-        }})
+        const {id} = this.props.match.params;
+        const uri = `/api/request/${id}`;
+        try {
+            const item = await (await fetch(uri)).json();
+            this.setState({item});
+        } catch (err) {
+            console.error(err);
+        }
     }
     _renderReverseButton = () => (
         <div className="request-header-right-element">
-            <button onClick={this.requestReverseToServer}>경매 제시</button>
+            <Link to={`/company/request/${this.props.match.params.id}`}>경매 제시</Link>
         </div>
     )
 
@@ -64,7 +57,7 @@ export default class CompanyRequest extends Component {
             </div>
         )
     }
-
+    goBack = () => this.props.history.goBack();
     render() {
         return(
             <div className="content company-request">

@@ -5,7 +5,7 @@ import {Request, RequestDetail, ReverseRequest, Home} from './components/home'
 import { Login } from './components/login';
 import Main from "./components/Main";
 import { SignUp } from "./components/signup";
-import {CompanyForSale, CompanyRequest} from "./components/company";
+import {CompanyForSale, CompanyRequest, CompanyReverseRequest, CompanyReverseList, CompanyReverseDetail } from "./components/company";
 
 function App() {
   return (
@@ -20,7 +20,9 @@ function App() {
                     <Route path="/user/reverse/:id" component={ReverseRequest} />
                 <Route exact path="/company" component={CompanyForSale} />
                     <Route path="/company/list/:id" component={CompanyRequest} />
-
+                    <Route path="/company/request/:id" component={CompanyReverseRequest} />
+                    <Route exact path="/company/reverse" component={CompanyReverseList}/>
+                        <Route path="/company/reverse/:id" component={CompanyReverseDetail}/>
           </Switch>
       </BrowserRouter>
   );
