@@ -5,7 +5,7 @@ import {Request, RequestDetail, ReverseRequest, Home, DoneRequest} from './compo
 import { Login } from './components/login';
 import Main from "./components/Main";
 import { SignUp } from "./components/signup";
-import {CompanyForSale, CompanyRequest, CompanyReverseRequest, CompanyReverseList, CompanyReverseDetail, CompanyDoneRequest } from "./components/company";
+import {CompanyForSale, CompanyRequest, CompanyReverseRequest, CompanyReverseList, CompanyReverseDetail, CompanyDoneRequest, CompanySubmitRequest } from "./components/company";
 import {CompanyIntroduction} from "./components/introduction";
 
 export default class App extends React.Component {
@@ -23,6 +23,7 @@ export default class App extends React.Component {
                         <Route path="/user/reverse/:id" component={ReverseRequest}/>
                     <Route exact path="/company" component={CompanyForSale}/>
                         <Route path="/company/done" component={CompanyDoneRequest}/>
+                        <Route path="/company/submit" component={CompanySubmitRequest}/>
                         <Route path="/company/list/:id" component={CompanyRequest}/>
                         <Route path="/company/request/:id" component={CompanyReverseRequest}/>
                         <Route exact path="/company/reverse" component={CompanyReverseList}/>

@@ -3,6 +3,7 @@ package kr.ac.jejunu.sslab.gongdae.api;
 import kr.ac.jejunu.sslab.gongdae.model.ReverseAuction;
 import kr.ac.jejunu.sslab.gongdae.payload.RequestReversePayLoad;
 import kr.ac.jejunu.sslab.gongdae.service.ReverseAuctionService;
+import kr.ac.jejunu.sslab.gongdae.service.UserService;
 import kr.ac.jejunu.sslab.gongdae.vo.ReverseAuctionVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -17,6 +18,7 @@ import java.util.Optional;
 @RequestMapping("/api/reverse")
 public class ReverseAuctionController {
     private final ReverseAuctionService reverseAuctionService;
+    private final UserService userService;
 
     @GetMapping("/{id}")
     public ResponseEntity<ReverseAuction> getReverseAuctionById(@PathVariable Long id) {
@@ -27,6 +29,9 @@ public class ReverseAuctionController {
         }
     }
 
+    @GetMapping("")
+
+    // for company
     @PostMapping(consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity requestReverse(@RequestBody RequestReversePayLoad requestReversePayLoad) {
         try {

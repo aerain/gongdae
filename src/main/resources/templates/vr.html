@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <title>hello360</title>
+    <style>body { margin: 0; }</style>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  </head>
+  <body>
+    <!-- Attachment point for your app -->
+    <div id="container"></div>
+    <script src="/vr/client.bundle.js"></script>
+    <script>
+      // Initialize the React 360 application      
+      React360.init(
+        'vr/index.bundle.js',
+        document.getElementById('container'),
+        {
+          assetRoot: 'images/',
+          imageUrl: new URLSearchParams(window.location.search).get("image_url")
+        }
+      );
+    </script>
+  </body>
+</html>
+

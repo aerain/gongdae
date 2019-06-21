@@ -5,6 +5,7 @@ import kr.ac.jejunu.sslab.gongdae.model.Estimate;
 import kr.ac.jejunu.sslab.gongdae.model.ReverseAuction;
 import kr.ac.jejunu.sslab.gongdae.vo.ReverseAuctionVO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,7 +26,7 @@ public class ReverseAuctionService {
             reverseAuction.setPrice(estimateRepository.sumByReverseAuctionId(id));
             reverseAuction.setEstimateList(estimateRepository.findAllByReverseAuctionId(id));
             reverseAuction.getCompany()
-                    .setScore(Optional.of(reviewRepository.findAvgByCompanyId(reverseAuction.getCompany().getId()).get()).orElse(0));
+                    .setScore(reviewRepository.findAvgByCompanyId(reverseAuction.getCompany().getId()).orElse(0));
             return reverseAuction;
         }).orElseThrow(IllegalAccessException::new);
     }
@@ -38,6 +39,11 @@ public class ReverseAuctionService {
     }
 
     public void saveReverse(Long requestId, List<Estimate> estimateList) throws IllegalAccessException {
+
+        if(userService.getCurrentUser().getType() != 1 || reverseAuctionRepository.
+                existsBycompanyIdAndRequestId(userService.getCurrentSessionId(), requestId))
+            throw new IllegalAccessException();
+
         ReverseAuction reverseAuction = reverseAuctionRepository.save(
                 ReverseAuction.builder()
 //                        .id(userService.getCurrentSessionId())
@@ -46,5 +52,9 @@ public class ReverseAuctionService {
                         .build());
         estimateList.parallelStream().forEach(estimate -> estimate.setReverseAuction(reverseAuction));
         estimateRepository.saveAll(estimateList);
+    }
+
+    public boolean isExists(Long requestId, Long companyId) {
+        return reverseAuctionRepository.existsBycompanyIdAndRequestId(companyId, requestId);
     }
 }

@@ -1,5 +1,6 @@
 package kr.ac.jejunu.sslab.gongdae.repository;
 
+import kr.ac.jejunu.sslab.gongdae.model.Request;
 import kr.ac.jejunu.sslab.gongdae.model.ReverseAuction;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
@@ -15,4 +16,8 @@ public interface ReverseAuctionRepository extends JpaRepository<ReverseAuction, 
     Long countByrequestId(Long id);
 
     Integer countBycompanyIdAndChosen(Long companyId, Boolean chosen);
+
+    Boolean existsBycompanyIdAndRequestId(Long companyId, Long requestId);
+
+    List<ReverseAuction> findAllBycompanyIdAndChosen(Long companyId, Boolean chosen);
 }

@@ -25,10 +25,7 @@ public class CompanyService {
     public Company findCompany(Long companyId) throws IllegalAccessException {
         return Optional.of(companyRepository.findById(companyId).get())
                 .map(company -> {
-                    company.setScore(Optional
-                            .of(reviewRepository.findAvgByCompanyId(companyId)
-                                    .get())
-                            .orElse(0));
+                    company.setScore(reviewRepository.findAvgByCompanyId(companyId).orElse(0));
                     company.setChosenCount(reverseAuctionRepository.countBycompanyIdAndChosen(companyId, true));
                     company.setCompanyReview(reviewRepository.findBycompanyId(companyId));
                     return company;

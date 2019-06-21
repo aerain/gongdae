@@ -5,7 +5,7 @@
 }
 
 .company-reverse-request > .request-detail > .request-info > .request-img {
-    flex: 0 0 300px;
+    flex: 0 0 110px;
     -webkit-background-size: cover;
     background-size: cover;
     background-position: 50% 50%;

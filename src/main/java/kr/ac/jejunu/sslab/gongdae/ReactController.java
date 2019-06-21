@@ -31,4 +31,9 @@ public class ReactController {
         }).orElse("index");
     }
 
+    @GetMapping("/vr")
+    public String vr360() {
+        return "vr";
+    }
+
 }

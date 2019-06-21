@@ -33,6 +33,9 @@ public class Request {
     private Long companySize;
     @Transient
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Boolean isAlreadySubmit;
+    @Transient
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<RequestDetail> requestDetailList;
 //    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 //    @JoinColumn(name = "request_id")

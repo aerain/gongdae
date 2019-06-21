@@ -26,7 +26,7 @@ export default class CompanyRequest extends Component {
     }
     _renderReverseButton = () => (
         <div className="request-header-right-element">
-            {this.state.item && !this.state.item.sold && this._renderRequestLink()}
+            {this.state.item && !this.state.item.sold  && !this.state.item.isAlreadySubmit && this._renderRequestLink()}
         </div>
     )
 

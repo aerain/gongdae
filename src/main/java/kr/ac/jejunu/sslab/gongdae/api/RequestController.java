@@ -38,29 +38,41 @@ public class RequestController {
 
     @GetMapping
     public ResponseEntity<List<Request>> getRequestList() {
-        return getListResponseEntity(false);
-    }
-
-    private ResponseEntity<List<Request>> getListResponseEntity(boolean sold) {
         Member member = userService.getCurrentUser();
         switch (member.getType()) {
             case 0:
-                return ResponseEntity.ok(requestService.getRequestListByUserId(member.getId(), sold));
+                return ResponseEntity.ok(requestService.getRequestListByUserId(member.getId(), false));
             case 1:
-                return ResponseEntity.ok(requestService.getRequestList(sold));
+                return ResponseEntity.ok(requestService.getRequestList(false));
             default:
                 return ResponseEntity.ok().build();
         }
     }
 
+    @GetMapping("/submit")
+    public ResponseEntity<List<Request>> getSubmittedList() {
+        if(userService.getCurrentUser().getType() == 1)
+            return ResponseEntity.ok(requestService.getRequestSubmitList(false));
+        else
+            return ResponseEntity.badRequest().build();
+    }
+
     @GetMapping("/done")
     public ResponseEntity<List<Request>> getRequestDoneList() {
-        return getListResponseEntity(true);
+        if(userService.getCurrentUser().getType() == 1)
+            return ResponseEntity.ok(requestService.getRequestSubmitList(true));
+        else
+            return ResponseEntity.ok(requestService.getRequestListByUserId(userService.getCurrentUser().getId(),  true));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Request> getRequestById(@PathVariable Long id) {
-        return ResponseEntity.ok(requestService.getRequestById(id));
+        try {
+            return ResponseEntity.ok(requestService.getRequestById(id));
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @PostMapping(path="/confirm", consumes=MediaType.APPLICATION_JSON_UTF8_VALUE)

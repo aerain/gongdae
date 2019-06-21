@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -25,13 +26,16 @@ public class RequestService {
     private final UserService userService;
     private final CompanyRepository companyRepository;
 
-    public Request getRequestById(Long id) {
-        return Optional.ofNullable(requestRepository.findById(id)).map(requestOptional -> {
-            Request presentRequest = requestOptional.get();
-            presentRequest.setRequestDetailList(requestDetailRepository.findAllByrequestId(id));
-            presentRequest.setCompanySize(reverseAuctionRepository.countByrequestId(id));
-            return presentRequest;
-        }).orElse(null);
+    public Request getRequestById(Long id) throws IllegalAccessException {
+        return Optional.of(requestRepository.findById(id).get()).map(request -> {
+            request.setRequestDetailList(requestDetailRepository.findAllByrequestId(id));
+            request.setCompanySize(reverseAuctionRepository.countByrequestId(id));
+            // if Admin
+            if(userService.getCurrentUser().getType() == 1) {
+                request.setIsAlreadySubmit(reverseAuctionRepository.existsBycompanyIdAndRequestId(userService.getCurrentSessionId(), request.getId()));
+            }
+            return request;
+        }).orElseThrow(IllegalAccessException::new);
     }
 
     public void saveRequest(String title, String place, MultipartFile vrImgUrl, String requestList) throws IOException {
@@ -80,7 +84,10 @@ public class RequestService {
         reverseAuctionRepository.save(reverseAuction);
     }
 
-    public List<Request> getRequestList(boolean sold) {
-        return requestRepository.findAllOnProgress(sold);
+    public List<Request> getRequestSubmitList(boolean chosen) {
+        return reverseAuctionRepository.findAllBycompanyIdAndChosen(userService.getCurrentSessionId(), chosen).stream().map(ReverseAuction::getRequest).collect(Collectors.toList());
+    }
+    public List<Request> getRequestList(boolean done) {
+        return requestRepository.findAllOnProgress(false);
     }
 }

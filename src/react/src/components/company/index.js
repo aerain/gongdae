@@ -4,4 +4,5 @@ import CompanyReverseRequest from './CompanyReverseRequest';
 import CompanyReverseList from './CompanyReverseList';
 import CompanyReverseDetail from './CompanyReverseDetail';
 import CompanyDoneRequest from './CompanyDoneRequest';
-export {CompanyForSale, CompanyRequest, CompanyReverseRequest, CompanyReverseList, CompanyReverseDetail, CompanyDoneRequest };
+import CompanySubmitRequest from './CompanySubmitRequest';
+export {CompanyForSale, CompanyRequest, CompanyReverseRequest, CompanyReverseList, CompanyReverseDetail, CompanyDoneRequest, CompanySubmitRequest };

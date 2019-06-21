@@ -1,8 +1,12 @@
 {
   "data": [
     {
-      "text": "내가 구매한 견적 보기",
+      "text": "구매가 확정된 견적 보기",
       "uri": "/company/done"
+    },
+    {
+      "text": "내가 구매한 견적 보기",
+      "uri": "/company/submit"
     }
   ]
 }

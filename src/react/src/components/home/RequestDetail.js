@@ -51,7 +51,7 @@ export default class RequestDetail extends Component {
                     onClick={this.goBack}
                 />
                 <p className="title">{item.title}</p>
-                <div style={{backgroundImage: `url(${item.imgUrl})`}} alt="테스트" className="vr-img"/>
+                <a href={`/vr?image_url=${encodeURIComponent(item.imgUrl)}`} style={{backgroundImage: `url(${item.imgUrl})`}} alt="테스트" className="vr-img"/>
                 <button className="sub-list" onClick={this.toggleSubList}>
                     <span>내 요청리스트</span>
                     <div className="material-icons" >
